@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -N TIDE_P02_POINTVERIFY
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m a
+#PBS -l walltime=01:00:00
+#PBS -l select=1:ncpus=2:mem=4gb
+# Not an array job -- single deterministic run. The transversality sweep
+# (980 combinations) took ~20 minutes on the dev machine; walltime here
+# has generous margin.
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+bash Code_2_Run.sh

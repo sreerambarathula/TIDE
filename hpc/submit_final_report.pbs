@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -N TIDE_FINAL_REPORT
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m ae
+#PBS -l walltime=00:10:00
+#PBS -l select=1:ncpus=1:mem=2gb
+# Submitted with a dependency on ALL FOUR streams' merge/completion jobs
+# (see submit_everything.sh) -- only runs once everything else has
+# succeeded. Pure aggregation, no computation -- seconds to run.
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
+ENV="$ROOT/envs/tide_env"
+"$ENV/bin/python" Code_Final_Master_Report.py

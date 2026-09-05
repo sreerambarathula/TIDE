@@ -1,0 +1,13 @@
+#!/bin/bash
+#PBS -N TIDE_P04_MECHANISM
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m a
+#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -J 0-19
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+bash Code_2_Run_Seed.sh

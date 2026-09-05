@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -N TIDE_P03_MERGE
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m a
+#PBS -l walltime=00:10:00
+#PBS -l select=1:ncpus=1:mem=2gb
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
+ENV="$ROOT/envs/tide_env"
+"$ENV/bin/python" Code_3_Merge_Results.py

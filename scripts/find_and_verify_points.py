@@ -170,13 +170,13 @@ def verify_bt_point(name, x0):
             x0, p["Fr"], p["Lam"], p["ki"], p["ke"], n1)
         n1_results[n1] = dict(nsub=ns_n1, npch=np_n1, converged=bool(conv_n1))
 
-    matches_table2 = abs(nsub - p["Nsub"]) < 1e-4 and abs(npch - p["Npch"]) < 1e-3
-    is_genuine_double_zero = float(np.max(np.abs(pair))) < 1e-4
-    n1_independent = all(
+    matches_table2 = bool(abs(nsub - p["Nsub"]) < 1e-4 and abs(npch - p["Npch"]) < 1e-3)
+    is_genuine_double_zero = bool(float(np.max(np.abs(pair))) < 1e-4)
+    n1_independent = bool(all(
         abs(v["nsub"] - n1_results[2]["nsub"]) < 1e-4 and
         abs(v["npch"] - n1_results[2]["npch"]) < 1e-3
         for v in n1_results.values()
-    )
+    ))
     status = "PASS" if (converged and matches_table2 and is_genuine_double_zero and n1_independent) else "FAIL"
 
     print(f"  Converged to Nsub={nsub:.9f}, Npch={npch:.9f} "
