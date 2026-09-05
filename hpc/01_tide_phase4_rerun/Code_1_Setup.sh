@@ -66,12 +66,19 @@ done
 test -n "$PYTHON"
 
 if [[ ! -x "$ENV/bin/python" ]]; then
+  echo "Creating venv at $ENV ..."
   "$PYTHON" -m venv "$ENV"
 fi
+echo "Upgrading pip/setuptools/wheel ..."
 "$ENV/bin/python" -m pip install --upgrade pip setuptools wheel
+echo "Installing tide package (pip install -e .) ..."
 "$ENV/bin/python" -m pip install -e "$VENDOR"
+echo "Installing locked dependencies (JAX, NumPy, SciPy, Optax -- this is the"
+echo "slow step, several minutes with no output is normal, do NOT interrupt) ..."
 "$ENV/bin/python" -m pip install -r "$VENDOR/requirements-lock.txt"
+echo "Installing pytest ..."
 "$ENV/bin/python" -m pip install pytest
+echo "Dependency installation complete."
 
 "$ENV/bin/python" - <<'PY'
 import jax, numpy, scipy, optax
@@ -87,8 +94,8 @@ PY
 "$ENV/bin/python" -c "
 import sys; sys.path.insert(0, '$VENDOR/src')
 from tide.surrogates.bt_point_data import wedge_boundaries_true
-from tide.continuation.double_zero import solve_double_zero
-print('post-audit tools present: wedge_boundaries_true, solve_double_zero')
+from tide.continuation.double_zero import find_double_zero_point
+print('post-audit tools present: wedge_boundaries_true, find_double_zero_point')
 " || echo "WARNING: could not import expected post-audit symbols -- check VENDOR checkout"
 
 echo "Running full test suite (this should take ~15 min on one core) ..."
@@ -98,7 +105,7 @@ cd "$VENDOR"
 {
   echo "TIDE PACKAGE 01 - PHASE4 RERUN SETUP"
   echo "STATUS: PASS"
-  echo "REPOSITORY: https://github.com/sreerambarathula/tide"
+  echo "REPOSITORY: https://github.com/sreerambarathula/Fresh_TIDE"
   echo "COMMIT: $COMMIT"
   echo "PYTHON: $("$ENV/bin/python" -V 2>&1)"
   echo "ENVIRONMENT: $ENV"
