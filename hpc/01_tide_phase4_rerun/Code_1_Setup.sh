@@ -45,6 +45,12 @@ trap fail ERR
 echo "P01 setup started: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 if [[ -d "$VENDOR/.git" ]]; then
+  # Force the remote to match $REPO (e.g. if this repo was originally
+  # cloned interactively over SSH but setup is now running as a batch job
+  # via submit_setup.pbs with GIT_REPO_URL/HTTPS+PAT) -- otherwise `fetch`
+  # silently reuses whatever remote URL is already in .git/config, which
+  # would try to prompt for the SSH passphrase with no TTY to answer it.
+  git -C "$VENDOR" remote set-url origin "$REPO"
   git -C "$VENDOR" fetch --all --prune
   git -C "$VENDOR" checkout "$BRANCH"
   git -C "$VENDOR" reset --hard "origin/$BRANCH"

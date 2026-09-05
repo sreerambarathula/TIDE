@@ -44,6 +44,23 @@ Must say `STATUS: PASS` (clones the repo, builds the shared venv at
 and runs the full test suite). This setup is shared by all 4 streams --
 only needs to happen once.
 
+**Alternative: run setup as a batch job instead of interactively.** The
+dependency-install step is silent for several minutes (installing JAX/
+SciPy/etc.), which can look hung on an interactive terminal; running it as
+a PBS job instead survives disconnects and doesn't risk an impatient
+`Ctrl-C`. A batch job has no terminal to type your SSH key's passphrase
+into, so this needs HTTPS + a fine-grained PAT instead of SSH:
+
+```bash
+export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"
+cd /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/repo/hpc/01_tide_phase4_rerun
+qsub -v GIT_REPO_URL submit_setup.pbs
+# then, once it finishes:
+cat /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/results/01_tide_phase4_rerun/SETUP_THIS.txt
+```
+`-v GIT_REPO_URL` passes that one variable from your shell into the job --
+the token is never written into any file or committed anywhere.
+
 **Before submitting anything**, check the `#PBS -P` project code (currently
 `as_mae_jyho`, your C2PD-HPC code) in every `submit*.pbs` file under `hpc/`
 is correct for this allocation, and add a `-q <queue>` line if your

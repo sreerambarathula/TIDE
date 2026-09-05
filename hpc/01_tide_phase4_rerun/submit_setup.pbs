@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -N TIDE_P01_SETUP
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m ae
+#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=2:mem=4gb
+# Runs Code_1_Setup.sh as a batch job instead of interactively on the login
+# node -- survives disconnects, doesn't get Ctrl-C'd by an impatient
+# terminal during the several-minutes-silent pip/JAX install, and doesn't
+# load the login node with compute it isn't meant for.
+#
+# Needs GIT_REPO_URL exported in your shell BEFORE submitting (a batch job
+# has no terminal to type your SSH key's passphrase into, so this uses
+# HTTPS + a fine-grained PAT instead -- the token sits in the URL, nothing
+# to prompt for):
+#   export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"
+#   qsub -v GIT_REPO_URL submit_setup.pbs
+#
+# `-v GIT_REPO_URL` passes that one variable from your shell into the job's
+# environment -- the token is never written into this file or committed
+# anywhere.
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+: "${GIT_REPO_URL:?Export GIT_REPO_URL and resubmit with: qsub -v GIT_REPO_URL submit_setup.pbs}"
+bash Code_1_Setup.sh
