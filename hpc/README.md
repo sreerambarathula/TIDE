@@ -30,36 +30,33 @@ statistics an unsplit run would produce.
 ## One-time setup (run once)
 
 ```bash
+Two steps, matching your C2PD-HPC pattern exactly: getting the code onto
+the cluster is separate from, and does not happen inside, the job that
+builds the environment.
+
+**Step 1 -- get the code (login node, lightweight, git only):**
+```bash
 ssh <cluster>
 mkdir -p /home/barathula.sreeram/Python_Stuff/Fresh_TIDE
 cd /home/barathula.sreeram/Python_Stuff/Fresh_TIDE
 git clone git@github.com:sreerambarathula/Fresh_TIDE.git repo
 cd repo/hpc/01_tide_phase4_rerun
-bash Code_1_Setup.sh
-cat /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/results/01_tide_phase4_rerun/SETUP_THIS.txt
+bash Code_0_Clone.sh
 ```
 
-Must say `STATUS: PASS` (clones the repo, builds the shared venv at
-`$TIDE_ROOT/envs/tide_env`, confirms the post-audit tools import cleanly,
-and runs the full test suite). This setup is shared by all 4 streams --
-only needs to happen once.
-
-**Alternative: run setup as a batch job instead of interactively.** The
-dependency-install step is silent for several minutes (installing JAX/
-SciPy/etc.), which can look hung on an interactive terminal; running it as
-a PBS job instead survives disconnects and doesn't risk an impatient
-`Ctrl-C`. A batch job has no terminal to type your SSH key's passphrase
-into, so this needs HTTPS + a fine-grained PAT instead of SSH:
-
+**Step 2 -- build the environment (job only, no git, no login-node compute):**
 ```bash
-export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"
-cd /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/repo/hpc/01_tide_phase4_rerun
-qsub -v GIT_REPO_URL submit_setup.pbs
-# then, once it finishes:
+qsub submit_setup.pbs
+qstat -u "$USER"    # wait for it to finish
 cat /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/results/01_tide_phase4_rerun/SETUP_THIS.txt
 ```
-`-v GIT_REPO_URL` passes that one variable from your shell into the job --
-the token is never written into any file or committed anywhere.
+
+Must say `STATUS: PASS` (builds the shared venv at
+`$TIDE_ROOT/envs/tide_env`, confirms the post-audit tools import cleanly,
+and runs the full test suite). This environment is shared by all 4
+streams -- only needs to happen once. To update the code later, rerun
+`Code_0_Clone.sh` (git pull, login node) then `qsub submit_setup.pbs`
+again (only needed if dependencies changed, not for ordinary code edits).
 
 **Before submitting anything**, check the `#PBS -P` project code (currently
 `as_mae_jyho`, your C2PD-HPC code) in every `submit*.pbs` file under `hpc/`

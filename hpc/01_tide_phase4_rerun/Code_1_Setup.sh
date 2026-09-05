@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# TIDE Phase-4 rerun -- setup stage.
-# Mirrors the C2PD-HPC convention: clone/checkout, build a package-local venv,
-# write a PASS/FAIL-style report (SETUP_THIS.txt) so a stalled setup never
-# gets silently mistaken for a completed one.
+# TIDE environment build -- run ONLY as a submitted job (submit_setup.pbs),
+# never on the login node. Matches C2PD-HPC's 02_C2PD_Env_Setup shape: no
+# git operations here at all (that's Code_0_Clone.sh, run separately on
+# the login node first, since it's lightweight network I/O, not compute).
 set -Eeuo pipefail
 
 PACKAGE="01_tide_phase4_rerun"
@@ -10,15 +10,6 @@ ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
 RESULTS="$ROOT/results/$PACKAGE"
 VENDOR="$ROOT/repo"
 ENV="$ROOT/envs/tide_env"
-BRANCH="main"
-
-# Defaults to SSH, matching how you already clone your other private repos
-# on this cluster (an SSH key on your GitHub account works for ALL your
-# repos, Fresh_TIDE included -- nothing repo-specific to set up). Override
-# with GIT_REPO_URL if you'd rather use an HTTPS + fine-grained-PAT clone
-# instead, e.g.:
-#   export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"
-REPO="${GIT_REPO_URL:-git@github.com:sreerambarathula/Fresh_TIDE.git}"
 
 mkdir -p "$RESULTS" "$ROOT/envs"
 LOG="$RESULTS/setup.log"
@@ -28,7 +19,7 @@ exec > >(tee "$LOG") 2>&1
 fail() {
   rc=$?
   {
-    echo "TIDE PACKAGE 01 - PHASE4 RERUN SETUP"
+    echo "TIDE PACKAGE 01 - ENVIRONMENT SETUP"
     echo "STATUS: FAIL"
     echo "EXIT_CODE: $rc"
     echo "FAILED_LINE: ${BASH_LINENO[0]:-UNKNOWN}"
@@ -43,21 +34,14 @@ fail() {
 trap fail ERR
 
 echo "P01 setup started: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "Host: $(hostname)"
 
-if [[ -d "$VENDOR/.git" ]]; then
-  # Force the remote to match $REPO (e.g. if this repo was originally
-  # cloned interactively over SSH but setup is now running as a batch job
-  # via submit_setup.pbs with GIT_REPO_URL/HTTPS+PAT) -- otherwise `fetch`
-  # silently reuses whatever remote URL is already in .git/config, which
-  # would try to prompt for the SSH passphrase with no TTY to answer it.
-  git -C "$VENDOR" remote set-url origin "$REPO"
-  git -C "$VENDOR" fetch --all --prune
-  git -C "$VENDOR" checkout "$BRANCH"
-  git -C "$VENDOR" reset --hard "origin/$BRANCH"
-else
-  git clone --branch "$BRANCH" "$REPO" "$VENDOR"
+if [[ ! -d "$VENDOR/.git" ]]; then
+  echo "FATAL: $VENDOR does not exist. Run Code_0_Clone.sh on the login node first." >&2
+  false
 fi
 COMMIT="$(git -C "$VENDOR" rev-parse HEAD)"
+echo "Using repo at $VENDOR, commit $COMMIT"
 
 PYTHON=""
 for candidate in \
@@ -80,7 +64,7 @@ echo "Upgrading pip/setuptools/wheel ..."
 echo "Installing tide package (pip install -e .) ..."
 "$ENV/bin/python" -m pip install -e "$VENDOR"
 echo "Installing locked dependencies (JAX, NumPy, SciPy, Optax -- this is the"
-echo "slow step, several minutes with no output is normal, do NOT interrupt) ..."
+echo "slow step, several minutes with no output is normal) ..."
 "$ENV/bin/python" -m pip install -r "$VENDOR/requirements-lock.txt"
 echo "Installing pytest ..."
 "$ENV/bin/python" -m pip install pytest
@@ -95,8 +79,6 @@ print("SCIPY", scipy.__version__)
 print("OPTAX", optax.__version__)
 PY
 
-# Confirm the two post-audit corrections this rerun depends on are present
-# in the checked-out commit before spending compute time on it.
 "$ENV/bin/python" -c "
 import sys; sys.path.insert(0, '$VENDOR/src')
 from tide.surrogates.bt_point_data import wedge_boundaries_true
@@ -109,7 +91,7 @@ cd "$VENDOR"
 "$ENV/bin/python" -m pytest tests/ -q | tee "$RESULTS/pytest.log"
 
 {
-  echo "TIDE PACKAGE 01 - PHASE4 RERUN SETUP"
+  echo "TIDE PACKAGE 01 - ENVIRONMENT SETUP"
   echo "STATUS: PASS"
   echo "REPOSITORY: https://github.com/sreerambarathula/Fresh_TIDE"
   echo "COMMIT: $COMMIT"
