@@ -1,0 +1,32 @@
+# Exact working-environment lockfile (finding 9, external audit,
+# PROJECT_LOG.md Sec. 44): pyproject.toml's dependencies use ">=" minimum
+# bounds only, which are version REQUIREMENTS, not pins -- this file is
+# the actual pin, generated via `pip freeze` from the real .venv every
+# result in this project was computed with.
+# Python 3.13.7 (see PROJECT_LOG.md/pyproject.toml requires-python>=3.11)
+# Regenerate after any dependency change: pip freeze > requirements-lock.txt
+absl-py==2.5.0
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.63.0
+iapws==1.5.5
+iniconfig==2.3.0
+jax==0.11.1
+jaxlib==0.11.1
+kiwisolver==1.5.1
+matplotlib==3.11.1
+ml_dtypes==0.6.0
+numpy==2.5.2
+opt_einsum==3.4.0
+optax==0.2.8
+packaging==26.3
+pillow==12.3.0
+pluggy==1.6.0
+Pygments==2.21.0
+pyparsing==3.3.2
+pytest==9.1.1
+python-dateutil==2.9.0.post0
+scipy==1.18.1
+six==1.17.0
+# Editable install with no version control (tide==0.1.0)
+-e /Users/sreerambarathula/Codes/Claude_Code/Flow_Boiling_Instability

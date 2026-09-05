@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tide"
+version = "0.1.0"
+description = "TIDE: Two-phase Instability boundary via Decoupled-Error estimation"
+requires-python = ">=3.11"
+dependencies = [
+    "jax>=0.4.34",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+    "optax>=0.2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tide"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "matplotlib>=3.11.1",
+    "numpy>=2.4.6",
+    "scipy>=1.17.1",
+]

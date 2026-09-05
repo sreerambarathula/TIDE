@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+~$*
+*.tmp
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Copyrighted third-party reference PDFs -- not redistributed
+Imp_papers/
+
+# Local font/rendering scratch experiments, not part of the pipeline
+scratch/
+
+# Stray leftover artifacts, not part of the reproducibility pipeline
+tide/
+test_arrow.png
+test_subscript.png
+test_fig1_2x3.py
+create_fig1_notebook.py
