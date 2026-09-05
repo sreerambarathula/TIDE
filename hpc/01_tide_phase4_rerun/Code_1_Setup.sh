@@ -6,20 +6,19 @@
 set -Eeuo pipefail
 
 PACKAGE="01_tide_phase4_rerun"
-ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}"
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
 RESULTS="$ROOT/results/$PACKAGE"
 VENDOR="$ROOT/repo"
 ENV="$ROOT/envs/tide_env"
-REPO="https://github.com/sreerambarathula/Fresh_TIDE.git"
 BRANCH="main"
 
-# Fine-grained GitHub PAT with read-only access to just this repo, exported
-# before running this script (the repo is private -- gh CLI's own login on
-# your workstation does not carry over to the cluster). If you instead set
-# up an SSH deploy key on this account, delete the two lines below and
-# change REPO to git@github.com:sreerambarathula/Fresh_TIDE.git.
-: "${GITHUB_TOKEN:?Set GITHUB_TOKEN to a fine-grained PAT scoped to the Fresh_TIDE repo before running this script}"
-REPO="https://${GITHUB_TOKEN}@github.com/sreerambarathula/Fresh_TIDE.git"
+# Defaults to SSH, matching how you already clone your other private repos
+# on this cluster (an SSH key on your GitHub account works for ALL your
+# repos, Fresh_TIDE included -- nothing repo-specific to set up). Override
+# with GIT_REPO_URL if you'd rather use an HTTPS + fine-grained-PAT clone
+# instead, e.g.:
+#   export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"
+REPO="${GIT_REPO_URL:-git@github.com:sreerambarathula/Fresh_TIDE.git}"
 
 mkdir -p "$RESULTS" "$ROOT/envs"
 LOG="$RESULTS/setup.log"

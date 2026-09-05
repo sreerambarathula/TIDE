@@ -33,7 +33,7 @@ from scipy import stats as sstats
 THIS_FILE = Path(__file__).resolve()
 REPO_ROOT = THIS_FILE.parents[2]
 RESULTS = Path(
-    __import__("os").environ.get("TIDE_ROOT", "/home/barathula.sreeram/Python_Stuff/tide")
+    __import__("os").environ.get("TIDE_ROOT", "/home/barathula.sreeram/Python_Stuff/Fresh_TIDE")
 ) / "results" / "01_tide_phase4_rerun"
 OUT_DIR = REPO_ROOT / "data" / "generated"
 

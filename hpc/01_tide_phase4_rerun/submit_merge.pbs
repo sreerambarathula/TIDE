@@ -16,6 +16,6 @@
 set -Eeuo pipefail
 cd "$PBS_O_WORKDIR"
 
-ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}"
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
 ENV="$ROOT/envs/tide_env"
 "$ENV/bin/python" Code_3_Merge_Results.py

@@ -8,7 +8,7 @@
 # Code_1_Setup.sh has already completed with STATUS: PASS.
 set -Eeuo pipefail
 
-SETUP_REPORT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}/results/01_tide_phase4_rerun/SETUP_THIS.txt"
+SETUP_REPORT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}/results/01_tide_phase4_rerun/SETUP_THIS.txt"
 if [[ ! -f "$SETUP_REPORT" ]] || ! grep -q "STATUS: PASS" "$SETUP_REPORT"; then
     echo "Setup has not completed successfully yet (checked $SETUP_REPORT)." >&2
     echo "Run Code_1_Setup.sh first and confirm it reports STATUS: PASS." >&2

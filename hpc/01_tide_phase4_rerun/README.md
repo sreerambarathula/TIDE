@@ -34,19 +34,23 @@ never silently drift apart.
 
 ```bash
 ssh <cluster>
-mkdir -p /home/barathula.sreeram/Python_Stuff/tide
-export TIDE_ROOT=/home/barathula.sreeram/Python_Stuff/tide
-export GITHUB_TOKEN=<a fine-grained PAT scoped to read-only access on Fresh_TIDE>
-cd "$TIDE_ROOT"
-# copy Code_1_Setup.sh here first (scp it, or clone Fresh_TIDE once
-# manually to get this hpc/ folder, then run it from inside the checkout)
+mkdir -p /home/barathula.sreeram/Python_Stuff/Fresh_TIDE
+cd /home/barathula.sreeram/Python_Stuff/Fresh_TIDE
+git clone git@github.com:sreerambarathula/Fresh_TIDE.git repo
+cd repo/hpc/01_tide_phase4_rerun
 bash Code_1_Setup.sh
-cat "$TIDE_ROOT/results/01_tide_phase4_rerun/SETUP_THIS.txt"   # must say STATUS: PASS
+cat /home/barathula.sreeram/Python_Stuff/Fresh_TIDE/results/01_tide_phase4_rerun/SETUP_THIS.txt   # must say STATUS: PASS
 ```
 
-`Code_1_Setup.sh` clones `github.com/sreerambarathula/Fresh_TIDE` (private
--- needs `GITHUB_TOKEN`), builds a venv under `$TIDE_ROOT/envs/tide_env`,
-installs from `requirements-lock.txt`, confirms the post-audit tools
+Uses SSH by default (`git@github.com:...`), matching how you already
+clone your other private repos on this cluster -- your existing GitHub SSH
+key already covers `Fresh_TIDE`, nothing repo-specific to set up. Only if
+that SSH clone fails do you need `export GIT_REPO_URL="https://<token>@github.com/sreerambarathula/Fresh_TIDE.git"`
+before running `Code_1_Setup.sh` (a fine-grained PAT scoped to just this
+repo, as an HTTPS fallback).
+
+`Code_1_Setup.sh` builds a venv under `$TIDE_ROOT/envs/tide_env`, installs
+from `requirements-lock.txt`, confirms the post-audit tools
 (`wedge_boundaries_true`, `solve_double_zero`) import cleanly, and runs the
 full test suite before declaring PASS. If it reports FAIL, paste
 `SETUP_THIS.txt` back and don't proceed further.

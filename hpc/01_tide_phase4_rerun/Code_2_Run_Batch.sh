@@ -16,7 +16,7 @@
 set -Eeuo pipefail
 
 PACKAGE="01_tide_phase4_rerun"
-ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}"
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/Fresh_TIDE}"
 VENDOR="$ROOT/repo"
 ENV="$ROOT/envs/tide_env"
 PYTHON="$ENV/bin/python"
