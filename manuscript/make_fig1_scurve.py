@@ -4,6 +4,8 @@ and the three intersection points. Purely illustrative -- not simulated
 from the project's physical model, which is why it lives in manuscript/,
 not src/tide/.
 """
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -71,6 +73,6 @@ ax.text(1.3, 2.35, "negative-slope region\n(more flow $\\Rightarrow$ less $\\Del
         fontsize=9.5, color="#444444", ha="center")
 
 fig.tight_layout()
-out = "/Users/sreerambarathula/Codes/Claude_Code/Flow_Boiling_Instability/manuscript/figures/fig1_scurve_schematic.png"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "fig1_scurve_schematic.png")
 fig.savefig(out, dpi=300)
 print("saved", out, "intersections at G =", intersections)

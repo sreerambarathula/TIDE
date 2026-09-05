@@ -3,6 +3,8 @@ point (Point B), the direct empirical measurement that ruled out the
 naive quadratic-tangency assumption and motivated (then refuted, for
 this problem) the log-distance-feature fix attempt.
 """
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -47,6 +49,6 @@ ax.set_xlabel("Distance from BT point,  $\\delta = N_{sub,BT} - N_{sub}$")
 ax.set_ylabel("Stable window width  (in $N_{pch}$)")
 ax.legend(frameon=False, fontsize=9.5, loc="upper left")
 fig.tight_layout()
-out = "/Users/sreerambarathula/Codes/Claude_Code/Flow_Boiling_Instability/manuscript/figures/fig3_window_scaling.png"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "fig3_window_scaling.png")
 fig.savefig(out, dpi=300)
 print("saved", out, "slope=", slope, "R2=", r2)

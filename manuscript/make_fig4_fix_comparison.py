@@ -7,6 +7,8 @@ PROJECT_LOG.md Sec. 41-43 (baseline/capacity: 20 seeds; Fourier/log-distance/
 boundary-weighted single-architecture: 6 seeds; combined fix: 20 seeds,
 Sec. 43 final).
 """
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -46,6 +48,6 @@ ax.legend(frameon=False, fontsize=10.5, loc="upper right")
 ax.set_title("Absolute error is the metric that matters for \"did the fix help\";\n"
               "the near/far ratio can mislead when a fix changes both regions unevenly", fontsize=11)
 fig.tight_layout()
-out = "/Users/sreerambarathula/Codes/Claude_Code/Flow_Boiling_Instability/manuscript/figures/fig4_fix_comparison.png"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "fig4_fix_comparison.png")
 fig.savefig(out, dpi=300)
 print("saved", out, "-- NOTE: combined-fix bar pending final 20-seed numbers")
