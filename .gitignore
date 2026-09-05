@@ -12,9 +12,12 @@ Imp_papers/
 # Local font/rendering scratch experiments, not part of the pipeline
 scratch/
 
-# Stray leftover artifacts, not part of the reproducibility pipeline
-tide/
-test_arrow.png
-test_subscript.png
-test_fig1_2x3.py
-create_fig1_notebook.py
+# Stray leftover artifacts, not part of the reproducibility pipeline.
+# Leading slash anchors these to the repo root -- WITHOUT it, "tide/" also
+# matches src/tide/ (the actual real package) anywhere in the tree, which
+# silently excluded the entire package from every commit until this fix.
+/tide/
+/test_arrow.png
+/test_subscript.png
+/test_fig1_2x3.py
+/create_fig1_notebook.py
