@@ -3,11 +3,14 @@ codim-2 point (Point A) and (b) the genuine Bogdanov-Takens point (Point
 B), both from this project's own ground-truth continuation tools -- not a
 schematic.
 """
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 from tide.continuation.codim2_convergence import _fold, hopf_npch_general
-from tide.surrogates.bt_point_data import FR_BT, KE_BT, KI_BT, LAM_BT, NSUB_BT, wedge_boundaries
+from tide.surrogates.bt_point_data import (FR_BT, KE_BT, KI_BT, LAM_BT, NPCH_BT,
+                                            NSUB_BT, wedge_boundaries_true)
 
 plt.rcParams.update({"font.size": 12, "font.family": "serif", "axes.linewidth": 1.1})
 
@@ -35,7 +38,7 @@ hopf_a = np.array([v if v is not None else np.nan for v in hopf_a])
 nsub_b = np.linspace(NSUB_BT - 3.0, NSUB_BT, 80)
 lower_b, upper_b = [], []
 for ns in nsub_b:
-    lo, hi = wedge_boundaries(ns, FR_BT, LAM_BT, KI_BT, KE_BT, N1)
+    lo, hi = wedge_boundaries_true(ns, FR_BT, LAM_BT, KI_BT, KE_BT, N1)
     lower_b.append(lo)
     upper_b.append(hi)
 lower_b = np.array([v if v is not None else np.nan for v in lower_b])
@@ -57,8 +60,8 @@ ax.plot(nsub_b, lower_b, color="#1a3c6e", lw=2.2, label="Lower boundary (fold-ty
 ax.plot(nsub_b, upper_b, color="#b5451b", lw=2.2, label="Upper boundary (Hopf-type)")
 ax.fill_between(nsub_b, lower_b, upper_b, color="#ffe8b3", alpha=0.6, label="Stable window")
 ax.axvline(NSUB_BT, color="#888888", ls=":", lw=1.2)
-ax.plot([NSUB_BT], [20.59478], marker="*", color="black", ms=16, zorder=5)
-ax.annotate("BT point\n(window closes\nto zero width)", (NSUB_BT, 20.59478),
+ax.plot([NSUB_BT], [NPCH_BT], marker="*", color="black", ms=16, zorder=5)
+ax.annotate("BT point\n(window closes\nto zero width)", (NSUB_BT, NPCH_BT),
             xytext=(NSUB_BT - 2.85, 22.3), fontsize=9.5, ha="left",
             arrowprops=dict(arrowstyle="->", color="#333333", lw=1.0))
 ax.set_title("(b) Point B — genuine Bogdanov-Takens point\n(curves meet tangentially)", fontsize=11.5)
@@ -67,7 +70,7 @@ ax.set_ylabel("$N_{pch}$")
 ax.legend(frameon=False, fontsize=9.5, loc="upper left")
 
 fig.tight_layout()
-out = "/Users/sreerambarathula/Codes/Claude_Code/Flow_Boiling_Instability/manuscript/figures/fig2_bifurcation_maps.png"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "fig2_bifurcation_maps.png")
 fig.savefig(out, dpi=300)
 print("saved", out)
 print("Point A fold/hopf sample:", fold_a[:3], hopf_a[:3])
