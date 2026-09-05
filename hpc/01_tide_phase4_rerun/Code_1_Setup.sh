@@ -10,16 +10,16 @@ ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}"
 RESULTS="$ROOT/results/$PACKAGE"
 VENDOR="$ROOT/repo"
 ENV="$ROOT/envs/tide_env"
-REPO="https://github.com/sreerambarathula/tide.git"
+REPO="https://github.com/sreerambarathula/Fresh_TIDE.git"
 BRANCH="main"
 
 # Fine-grained GitHub PAT with read-only access to just this repo, exported
 # before running this script (the repo is private -- gh CLI's own login on
 # your workstation does not carry over to the cluster). If you instead set
 # up an SSH deploy key on this account, delete the two lines below and
-# change REPO to git@github.com:sreerambarathula/tide.git.
-: "${GITHUB_TOKEN:?Set GITHUB_TOKEN to a fine-grained PAT scoped to the tide repo before running this script}"
-REPO="https://${GITHUB_TOKEN}@github.com/sreerambarathula/tide.git"
+# change REPO to git@github.com:sreerambarathula/Fresh_TIDE.git.
+: "${GITHUB_TOKEN:?Set GITHUB_TOKEN to a fine-grained PAT scoped to the Fresh_TIDE repo before running this script}"
+REPO="https://${GITHUB_TOKEN}@github.com/sreerambarathula/Fresh_TIDE.git"
 
 mkdir -p "$RESULTS" "$ROOT/envs"
 LOG="$RESULTS/setup.log"

@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -N TIDE_P01_PHASE4
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m a
+#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -J 0-21
+# ^ 22 array subjobs (5 Point-B configs x 4 seed-batches + 2 Point-C
+# configs x 1 batch each). 1 cpu / 4gb per subjob -- these are small MLPs,
+# more cores per task would not make one seed's training faster, only
+# increase contention across the ~22 concurrently-running tasks. 22 cores
+# used at once out of your 60 free leaves comfortable headroom.
+#
+# VERIFY BEFORE SUBMITTING: -P as_mae_jyho matches the project code you
+# use for C2PD-HPC. If this new allocation/PI code differs for tide, or if
+# your scheduler requires an explicit -q <queue> for this node type,
+# update both lines accordingly (C2PD-HPC's small jobs omitted -q and
+# used the default queue; qamd_wfly was only used for its large 16-48h
+# runs -- these are much closer to the small-job end).
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+bash Code_2_Run_Batch.sh

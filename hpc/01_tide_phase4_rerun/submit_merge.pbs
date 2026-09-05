@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -N TIDE_P01_MERGE
+#PBS -P as_mae_jyho
+#PBS -j oe
+#PBS -M barathula.sreeram@ntu.edu.sg
+#PBS -m ae
+#PBS -l walltime=00:10:00
+#PBS -l select=1:ncpus=1:mem=2gb
+# Submitted with a dependency on the array job (see submit_all.sh) so it
+# only runs after all 22 tasks finish. Reading 22 small JSON files and
+# recomputing a Wilcoxon test takes seconds -- this is here as its own PBS
+# job (rather than run on the login node) purely so the whole pipeline,
+# start to finish, produces its final PASS/FAIL report without you having
+# to babysit it or run anything manually after submission.
+
+set -Eeuo pipefail
+cd "$PBS_O_WORKDIR"
+
+ROOT="${TIDE_ROOT:-/home/barathula.sreeram/Python_Stuff/tide}"
+ENV="$ROOT/envs/tide_env"
+"$ENV/bin/python" Code_3_Merge_Results.py
