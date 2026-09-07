@@ -18,6 +18,7 @@ import json
 import argparse
 import datetime
 import subprocess
+import multiprocessing as mp
 import numpy as np
 from pathlib import Path
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -177,7 +178,8 @@ def run_stage_3_surrogate_training(n_seeds=20, n_workers=50, mode="full"):
     log(f"Launching {len(tasks)} independent training jobs across {n_workers} parallel CPU processes...")
     results_by_config = {cfg: {"near": [], "far": [], "seeds": []} for cfg in configs}
 
-    with ProcessPoolExecutor(max_workers=n_workers) as executor:
+    ctx = mp.get_context("spawn")
+    with ProcessPoolExecutor(max_workers=n_workers, mp_context=ctx) as executor:
         futures = {executor.submit(_train_single_seed_task, t): t for t in tasks}
         completed_count = 0
         for fut in as_completed(futures):
@@ -394,6 +396,11 @@ def run_stage_7_diff(stage3_summary, stage4_stats):
 # MASTER MAIN ENTRYPOINT
 # ==============================================================================
 def main():
+    try:
+        mp.set_start_method("spawn")
+    except RuntimeError:
+        pass
+
     parser = argparse.ArgumentParser(description="TIDE End-to-End Master Pipeline Runner")
     parser.add_argument("--mode", choices=["full", "quick"], default="full", help="Execution mode (full=20 seeds, quick=3 seeds)")
     parser.add_argument("--cores", type=int, default=os.cpu_count() or 4, help="Number of CPU cores/workers to utilize")
