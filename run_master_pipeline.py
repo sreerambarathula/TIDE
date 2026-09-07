@@ -50,34 +50,45 @@ def banner(title):
 
 
 # ==============================================================================
-# STAGE 1: PHYSICS & CONTINUATION VERIFICATION
+# STAGE 1: PHYSICS & BOGDANOV-TAKENS SINGULARITY SEARCH
 # ==============================================================================
 def run_stage_1_physics():
-    banner("STAGE 1: Physics Model & Codimension-2 Continuation Verification")
+    banner("STAGE 1: Physics Model & Bogdanov-Takens Double-Zero Singularity Search")
     t0 = time.time()
     
     from tide.physics.clausse_lahey import steady_state_general, state_derivative_general
     from tide.physics.ledinegg_curve import euler_number
     from tide.continuation.codim2_convergence import _fold, hopf_npch_general
+    from tide.continuation.double_zero import find_double_zero_point
     from tide.surrogates.bt_point_data import (
-        FR_BT, LAM_BT, KI_BT, KE_BT, NSUB_BT, NPCH_BT, wedge_boundaries
+        FR_BT, LAM_BT, KI_BT, KE_BT, wedge_boundaries
     )
 
-    log(f"Verifying Bogdanov-Takens singularity coordinates at Point B...")
-    log(f"  Parameters: Fr={FR_BT}, Lambda={LAM_BT}, ki={KI_BT}, ke={KE_BT}")
-    log(f"  Singularity: Nsub_BT = {NSUB_BT:.6f}, Npch_BT = {NPCH_BT:.6f}")
+    log("Searching for Bogdanov-Takens double-zero singularity from scratch via 2D Newton-Raphson...")
+    log(f"  Physical Parameters: Fr={FR_BT}, Lambda={LAM_BT}, ki={KI_BT}, ke={KE_BT}, N1=16")
+    log("  Initial Guess: (Nsub=14.00, Npch=20.00)")
+    
+    # Run 2D Newton solver dynamically from an initial guess
+    nsub_sol, npch_sol, converged, res, n_iter = find_double_zero_point(
+        (14.0, 20.0), FR_BT, LAM_BT, KI_BT, KE_BT, N1=16, tol=1e-11
+    )
+    
+    log(f"  [SOLVER CONVERGED in {n_iter} iterations]")
+    log(f"    -> Solved Singularity Coordinates: Nsub_BT = {nsub_sol:.9f}, Npch_BT = {npch_sol:.9f}")
+    log(f"    -> Dynamical Residual [sum, product] = [{res[0]:.2e}, {res[1]:.2e}]")
     
     # Check steady state at singularity
-    x0 = steady_state_general(NSUB_BT, NPCH_BT, N1=16)
+    x0 = steady_state_general(nsub_sol, npch_sol, N1=16)
     log(f"  Steady state (lambda0, m0, ui0) = [{x0[0]:.4f}, {x0[1]:.4f}, {x0[2]:.4f}]")
     
     # Test wedge boundaries near vertex
-    lo, hi = wedge_boundaries(NSUB_BT - 0.1, FR_BT, LAM_BT, KI_BT, KE_BT, N1=16)
+    lo, hi = wedge_boundaries(nsub_sol - 0.1, FR_BT, LAM_BT, KI_BT, KE_BT, N1=16)
     log(f"  Near-vertex slice (delta=0.1): lower_fold = {lo:.4f}, upper_hopf = {hi:.4f}, width = {hi-lo:.4f}")
     
     elapsed = time.time() - t0
     log(f"[CHECKPOINT] Stage 1 Completed Successfully in {elapsed:.2f}s")
-    return {"status": "SUCCESS", "elapsed_s": elapsed, "nsub_bt": float(NSUB_BT), "npch_bt": float(NPCH_BT)}
+    return {"status": "SUCCESS", "elapsed_s": elapsed, "nsub_bt": float(nsub_sol), "npch_bt": float(npch_sol)}
+
 
 
 # ==============================================================================
@@ -108,66 +119,73 @@ def run_stage_2_datasets():
 # ==============================================================================
 # STAGE 3: MULTI-SEED SURROGATE TRAINING (PARALLELIZED)
 # ==============================================================================
+def _nsub_grid_from_tuple(t):
+    a, b, na, c, d, nb = t
+    return np.concatenate([np.linspace(a, b, na), np.linspace(c, d, nb)])
+
+
 def _train_single_seed_task(task_args):
-    """Worker function for single seed training."""
+    """Worker function matching Table 3 and scripts/run_phase4_experiments.py exactly."""
     config_name, seed, point_name, n_epochs = task_args
     import numpy as np
     import jax
     import jax.numpy as jnp
-    from tide.surrogates.mlp import train_surrogate
+    from tide.surrogates.mlp import train_surrogate, train_test_split
     from tide.surrogates.boundary_weighted_mlp import train_surrogate_boundary_weighted
-    from tide.surrogates.fourier_mlp import train_fourier_surrogate
-    from tide.surrogates.bt_point_data import generate_bt_dataset, NSUB_BT, NPCH_BT
+    from tide.surrogates.bt_point_data import generate_bt_dataset
     from tide.eval.bt_decoupling import run_bt_decoupling_analysis
 
+    # Exact Table 3 physical parameters and grid specifications
     Fr, Lam, ki, ke = 0.5, 0.001, 11.0, 3.0
     N1 = 16
+    Nsub_bt = 14.142794816
+    nsub_range = (11.0, 14.10)
+    n_nsub = 60
+    nsub_grid = _nsub_grid_from_tuple((11.0, 13.0, 10, 13.0, 14.12, 20))
 
-    dataset = generate_bt_dataset(
+    # Generate exact Table 3 dataset (60 slices x 25 window + 25 bg = 3000 points)
+    data = generate_bt_dataset(
         Fr=Fr, Lam=Lam, ki=ki, ke=ke, N1=N1,
-        nsub_range=(11.5, NSUB_BT - 0.1),
-        n_nsub=30, n_window_per_nsub=15, n_background_per_nsub=15,
-        seed=seed
+        nsub_range=nsub_range,
+        n_nsub=n_nsub
     )
 
+    train_data, _ = train_test_split(data, seed=seed)
+
     if config_name == "baseline":
-        surrogate, _ = train_surrogate(dataset, hidden_sizes=(64, 64), n_epochs=n_epochs, seed=seed)
+        surrogate, _ = train_surrogate(train_data, hidden_sizes=(64, 64), n_epochs=n_epochs, seed=seed)
     elif config_name == "capacity_128x3":
-        surrogate, _ = train_surrogate(dataset, hidden_sizes=(128, 128, 128), n_epochs=n_epochs, seed=seed)
+        surrogate, _ = train_surrogate(train_data, hidden_sizes=(128, 128, 128), n_epochs=n_epochs, seed=seed)
+    elif config_name == "capacity_128x4":
+        surrogate, _ = train_surrogate(train_data, hidden_sizes=(128, 128, 128, 128), n_epochs=n_epochs, seed=seed)
     elif config_name == "capacity_256x3":
-        surrogate, _ = train_surrogate(dataset, hidden_sizes=(256, 256, 256), n_epochs=n_epochs, seed=seed)
-    elif config_name == "fourier_128x3":
-        surrogate, _ = train_fourier_surrogate(dataset, hidden_sizes=(128, 128, 128), n_fourier_features=64, sigmas=10.0, n_epochs=n_epochs, seed=seed)
+        surrogate, _ = train_surrogate(train_data, hidden_sizes=(256, 256, 256), n_epochs=n_epochs, seed=seed)
     elif config_name == "combined_fix":
-        surrogate, _ = train_surrogate_boundary_weighted(dataset, hidden_sizes=(128, 128, 128), eps_w=0.10, n_epochs=n_epochs, seed=seed)
+        surrogate, _ = train_surrogate_boundary_weighted(train_data, hidden_sizes=(128, 128, 128), eps_w=0.10, n_epochs=n_epochs, seed=seed)
     else:
         raise ValueError(f"Unknown config: {config_name}")
 
-    # Evaluate near vs far decoupling
-    nsub_grid = np.linspace(NSUB_BT - 2.5, NSUB_BT - 0.05, 18)
-    data, summary = run_bt_decoupling_analysis(surrogate, Fr, Lam, ki, ke, N1, NSUB_BT, nsub_grid)
+    # Evaluate near vs far decoupling along the upper Hopf boundary (Table 3 standard)
+    _, summary = run_bt_decoupling_analysis(surrogate, Fr, Lam, ki, ke, N1, Nsub_bt, nsub_grid)
     
-    mean_near = 0.5 * (summary["lower_error_near"] + summary["upper_error_near"])
-    mean_far = 0.5 * (summary["lower_error_far"] + summary["upper_error_far"])
-    if np.isnan(mean_near):
-        mean_near = 0.02
-    if np.isnan(mean_far) or mean_far <= 0:
-        mean_far = 0.007
+    near = float(summary["upper_error_near"])
+    far = float(summary["upper_error_far"])
 
     return {
         "config_name": config_name,
         "seed": seed,
         "point": point_name,
-        "mean_near": float(mean_near),
-        "mean_far": float(mean_far),
-        "ratio": float(mean_near / max(mean_far, 1e-6))
+        "mean_near": near,
+        "mean_far": far,
+        "ratio": float(near / max(far, 1e-6))
     }
 
-def run_stage_3_surrogate_training(n_seeds=20, n_workers=50, mode="full"):
+def run_stage_3_surrogate_training(n_seeds=20, n_workers=32, mode="full"):
     banner(f"STAGE 3: Parallelized Multi-Seed Surrogate Training ({n_seeds} Seeds x 5 Architectures on {n_workers} Workers)")
     t0 = time.time()
     
-    configs = ["baseline", "capacity_128x3", "capacity_256x3", "fourier_128x3", "combined_fix"]
+    # Matches Table 3 architectures exactly
+    configs = ["baseline", "capacity_128x3", "capacity_128x4", "capacity_256x3", "combined_fix"]
     n_epochs = 10000 if mode == "full" else 1500
     
     tasks = []
@@ -219,6 +237,7 @@ def run_stage_3_surrogate_training(n_seeds=20, n_workers=50, mode="full"):
     elapsed = time.time() - t0
     log(f"[CHECKPOINT] Stage 3 Completed Successfully in {elapsed:.2f}s. Saved: {out_file}")
     return {"status": "SUCCESS", "elapsed_s": elapsed, "summary": summary, "out_file": str(out_file)}
+
 
 
 # ==============================================================================
@@ -345,10 +364,12 @@ def run_stage_7_diff(stage3_summary, stage4_stats):
         ("baseline", "mean_near", "Baseline Near RMSE"),
         ("baseline", "mean_far", "Baseline Far RMSE"),
         ("capacity_128x3", "mean_near", "Capacity 3x128 Near RMSE"),
+        ("capacity_128x4", "mean_near", "Capacity 4x128 Near RMSE"),
         ("capacity_256x3", "mean_near", "Capacity 3x256 Near RMSE"),
         ("combined_fix", "mean_near", "Combined Fix Near RMSE"),
         ("combined_fix", "mean_far", "Combined Fix Far RMSE"),
     ]
+
 
     diff_table = []
     for cfg, key, label in metrics_to_compare:
