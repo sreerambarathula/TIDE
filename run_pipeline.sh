@@ -5,7 +5,7 @@ set -Eeuo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-CORES=${1:-60}
+CORES=${1:-24}
 MODE=${2:-full}
 
 echo "Running TIDE Master Pipeline with $CORES cores in '$MODE' mode..."
