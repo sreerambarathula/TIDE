@@ -4,8 +4,11 @@ __pycache__/
 ~$*
 *.tmp
 *.pyc
+*.log
+*.out
 .pytest_cache/
 .ipynb_checkpoints/
+
 
 # Copyrighted third-party reference PDFs -- not redistributed
 Imp_papers/

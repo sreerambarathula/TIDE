@@ -6,45 +6,50 @@
 #PBS -m ae
 #PBS -l walltime=02:00:00
 #PBS -l select=1:ncpus=32:mpiprocs=32:mem=64gb
-#PBS -o TIDE_MASTER_RUN.log
+#PBS -o TIDE_MASTER_PBS.out
 
 set -Eeuo pipefail
 cd "$PBS_O_WORKDIR"
 
-echo "================================================================================"
-echo " TIDE ALL-IN-ONE MASTER HPC EXECUTION"
-echo " Start Time: $(date)"
-echo " Host: $(hostname)"
-echo " Workdir: $PBS_O_WORKDIR"
-echo " Cores Allocated: 32"
-echo "================================================================================"
+# Initialize fresh log file
+> TIDE_MASTER_RUN.log
 
+log_msg() {
+    echo "$1" | tee -a TIDE_MASTER_RUN.log
+}
 
+log_msg "================================================================================"
+log_msg " TIDE ALL-IN-ONE MASTER HPC EXECUTION"
+log_msg " Start Time: $(date)"
+log_msg " Host: $(hostname)"
+log_msg " Workdir: $PBS_O_WORKDIR"
+log_msg " Cores Allocated: 32"
+log_msg "================================================================================"
 
 # 1. Environment Bootstrap
-echo "[STEP 1/3] Loading Python module & configuring clean virtual environment..."
+log_msg "[STEP 1/3] Loading Python module & configuring clean virtual environment..."
 module load python/3.11 2>/dev/null || module load python3 2>/dev/null || module load anaconda3 2>/dev/null || true
 
 if [ ! -d ".hpc_venv" ]; then
-    echo "  Creating fresh virtual environment (.hpc_venv)..."
+    log_msg "  Creating fresh virtual environment (.hpc_venv)..."
     python3 -m venv .hpc_venv
 fi
 
 source .hpc_venv/bin/activate
-echo "  Python executable: $(which python3)"
-echo "  Python version:    $(python3 --version)"
+log_msg "  Python executable: $(which python3)"
+log_msg "  Python version:    $(python3 --version)"
 
-echo "  Installing/verifying locked dependencies..."
-python3 -m pip install --upgrade pip setuptools wheel --quiet
+log_msg "  Installing/verifying locked dependencies..."
+python3 -m pip install --upgrade pip setuptools wheel --quiet 2>&1 | tee -a TIDE_MASTER_RUN.log
 if [ -f "requirements-lock.txt" ]; then
-    python3 -m pip install -r requirements-lock.txt --quiet || python3 -m pip install jax jaxlib numpy scipy matplotlib pymupdf pytest --quiet
+    python3 -m pip install -r requirements-lock.txt --quiet 2>&1 | tee -a TIDE_MASTER_RUN.log || python3 -m pip install jax jaxlib numpy scipy matplotlib pymupdf pytest --quiet 2>&1 | tee -a TIDE_MASTER_RUN.log
 else
-    python3 -m pip install jax jaxlib numpy scipy matplotlib pymupdf pytest --quiet
+    python3 -m pip install jax jaxlib numpy scipy matplotlib pymupdf pytest --quiet 2>&1 | tee -a TIDE_MASTER_RUN.log
 fi
 python3 -m pip install -e . --no-deps --quiet 2>/dev/null || true
 
 # 2. Execute Master Pipeline
-echo "[STEP 2/3] Launching End-to-End Master Pipeline (All 7 Stages across 32 Cores)..."
+log_msg "[STEP 2/3] Launching End-to-End Master Pipeline (All 7 Stages across 32 Cores)..."
 export OMP_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export MKL_NUM_THREADS=1
@@ -52,9 +57,10 @@ export MKL_NUM_THREADS=1
 python3 -u run_master_pipeline.py --mode full --cores 32 2>&1 | tee -a TIDE_MASTER_RUN.log
 
 # 3. Final Summary & Completion Checkpoint
-echo "================================================================================"
-echo "[STEP 3/3] Execution Complete!"
-echo " End Time: $(date)"
-echo " Check DATA_DIFF_REPORT.md for the fresh vs reference data comparison."
-echo " Check manuscript/figures/ for the newly rendered 300 DPI figures."
-echo "================================================================================"
+log_msg "================================================================================"
+log_msg "[STEP 3/3] Execution Complete!"
+log_msg " End Time: $(date)"
+log_msg " Check DATA_DIFF_REPORT.md for the fresh vs reference data comparison."
+log_msg " Check manuscript/figures/ for the newly rendered 300 DPI figures."
+log_msg "================================================================================"
+
