@@ -1,3 +1,4 @@
+import sys
 """Panel (f): 2D Newton Sum-and-Product Solver Residual Convergence
 Contrasts rapid quadratic convergence of polynomial trace/determinant solver against divergence of raw-eigenvalue solver.
 """
@@ -28,7 +29,7 @@ CONFIG = {
         "figsize": (7.6, 5.6),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": "d:/AGravity/Tide_Tutor/Figures/figure_2/panel_f_newton_convergence.png",
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "panel_f_newton_convergence.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)

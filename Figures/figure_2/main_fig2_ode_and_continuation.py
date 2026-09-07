@@ -1,3 +1,4 @@
+import sys
 """Master Composite Figure 2: Moving-Boundary ODE Dynamics, Discretization Pathology, and Machine-Precision Continuation
 Publication-Grade 6-Panel Layout (2 Columns x 3 Rows) at 300 DPI for Elsevier RE&SS.
 
@@ -371,11 +372,11 @@ def generate_master_figure():
     draw_panel_f(ax_f)
 
     output_paths = [
-        "d:/AGravity/Tide_Tutor/Figures/figure_2/fig2_ode_and_continuation_master.png",
-        "d:/AGravity/Tide_Tutor/Figures/figure_2/fig2_ode_and_continuation_master.pdf",
-        "d:/AGravity/Tide_Tutor/Figures/figure_2/fig2_ode_and_continuation_master.svg",
-        "d:/AGravity/Tide_Tutor/manuscript/figures/fig2_ode_and_continuation.png",
-        "d:/AGravity/Tide_Tutor/manuscript/figures/fig2_ode_and_continuation.svg",
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "fig2_ode_and_continuation_master.png")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "fig2_ode_and_continuation_master.pdf")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "fig2_ode_and_continuation_master.svg")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures", "fig2_ode_and_continuation.png")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures", "fig2_ode_and_continuation.svg")),
     ]
 
     for out_path in output_paths:

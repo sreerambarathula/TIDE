@@ -11,12 +11,12 @@ cycler==0.12.1
 fonttools==4.63.0
 iapws==1.5.5
 iniconfig==2.3.0
-jax==0.11.1
-jaxlib==0.11.1
+jax==0.10.2
+jaxlib==0.10.2
 kiwisolver==1.5.1
 matplotlib==3.11.1
 ml_dtypes==0.6.0
-numpy==2.5.2
+numpy==2.4.6
 opt_einsum==3.4.0
 optax==0.2.8
 packaging==26.3
@@ -26,5 +26,5 @@ Pygments==2.21.0
 pyparsing==3.3.2
 pytest==9.1.1
 python-dateutil==2.9.0.post0
-scipy==1.18.1
+scipy==1.17.1
 six==1.17.0

@@ -1,3 +1,4 @@
+import sys
 """Panel (e): 2D Continuous Spatial Error Field |g_pred - g_true| Near BT Cusp
 Part of Master Figure 4 for Elsevier RE&SS.
 2D contour map in (Nsub, Npch) space demonstrating the sharp localized error ridge concentrated along the g=0 manifold.
@@ -56,10 +57,10 @@ CONFIG = {
 }
 
 def load_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig4_decoupling_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", r"D:\AGravity\Tide_Tutor\scripts\generate_fig4_ground_truth_data.py"], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig4_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 def draw_panel_e_on_ax(ax, data, config=CONFIG):

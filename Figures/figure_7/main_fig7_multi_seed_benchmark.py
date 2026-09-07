@@ -1,3 +1,4 @@
+import sys
 """Master Figure 7: Multi-Seed Statistical Benchmark and Pareto Frontier
 RE&SS Journal Standard - 6-Panel Layout (2 Columns x 3 Rows, 300 DPI)
 Typography: Aptos / Mathtext STIXSans, Sized-Up Font Hierarchy >= 11pt
@@ -10,7 +11,7 @@ import matplotlib.gridspec as gridspec
 
 output_dir = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(output_dir, exist_ok=True)
-ms_dir = "d:/AGravity/Tide_Tutor/manuscript/figures"
+ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures"))
 os.makedirs(ms_dir, exist_ok=True)
 
 # Publication Typography (RE&SS Standard >= 11pt, Aptos)

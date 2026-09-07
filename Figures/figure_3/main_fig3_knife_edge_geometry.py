@@ -1,3 +1,4 @@
+import sys
 """Master Figure 3: Global Bifurcation Maps and the Geometry of the "Knife-Edge" Stability Corridor
 Publication-Grade 4-Panel Layout (2 Columns x 2 Rows) at 300 DPI for Elsevier RE&SS.
 Evaluates 100% from true ODE continuation solutions and machine-precision stability margin fields.
@@ -67,10 +68,10 @@ PALETTE = {
 # DATA LOADER
 # ==============================================================================
 def load_ground_truth_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig3_continuation_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", r"D:\AGravity\Tide_Tutor\scripts\generate_fig3_ground_truth_data.py"], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig3_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 
@@ -406,8 +407,8 @@ def generate_master_fig3():
     ax_d = fig.add_subplot(gs[1, 1])
     draw_panel_d(ax_d, data)
 
-    output_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\Figures\figure_3")
-    ms_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\manuscript\figures")
+    output_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_3"))
+    ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures"))
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(ms_dir, exist_ok=True)
 

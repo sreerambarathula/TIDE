@@ -1,4 +1,5 @@
-﻿r"""Master Composite Figure 1: Multiscale Thermal-Hydraulic Dynamics of Two-Phase Flow Instabilities
+import sys
+r"""Master Composite Figure 1: Multiscale Thermal-Hydraulic Dynamics of Two-Phase Flow Instabilities
 Publication-Grade 6-Panel Layout (2 Columns x 3 Rows) at 300 DPI for Elsevier RE&SS.
 
 Panels:
@@ -17,7 +18,10 @@ import matplotlib._mathtext as mmt
 import matplotlib.gridspec as gridspec
 from matplotlib.patches import Rectangle, Circle, FancyBboxPatch, FancyArrowPatch
 import numpy as np
-import pymupdf
+try:
+    import pymupdf
+except ImportError:
+    pymupdf = None
 
 # ==============================================================================
 # 0. FONT REGISTRATION (Aptos / CloudFonts) & MATHTEXT SCALING
@@ -53,8 +57,8 @@ MASTER_TYPOGRAPHY = {
 # PANEL (A): USER AUTHORED SVG DRAWING (panel_a_zonation_self.svg)
 # ==============================================================================
 def draw_panel_a(ax):
-    svg_file = "d:/AGravity/Tide_Tutor/Figures/figure_1/panel_a_zonation_self.svg"
-    img_path = "d:/AGravity/Tide_Tutor/Figures/figure_1/panel_a_zonation_self_300dpi.png"
+    svg_file = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "panel_a_zonation_self.svg"))
+    img_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "panel_a_zonation_self_300dpi.png"))
 
     if not os.path.exists(img_path) and os.path.exists(svg_file):
         with open(svg_file, "r", encoding="utf-8") as f:
@@ -437,11 +441,11 @@ def generate_master_figure():
     draw_panel_f(ax_f)
 
     output_paths = [
-        "d:/AGravity/Tide_Tutor/Figures/figure_1/fig1_multiscale_dynamics_master.png",
-        "d:/AGravity/Tide_Tutor/Figures/figure_1/fig1_multiscale_dynamics_master.pdf",
-        "d:/AGravity/Tide_Tutor/Figures/figure_1/fig1_multiscale_dynamics_master.svg",
-        "d:/AGravity/Tide_Tutor/manuscript/figures/fig1_multiscale_dynamics.png",
-        "d:/AGravity/Tide_Tutor/manuscript/figures/fig1_multiscale_dynamics.svg",
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "fig1_multiscale_dynamics_master.png")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "fig1_multiscale_dynamics_master.pdf")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "fig1_multiscale_dynamics_master.svg")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures", "fig1_multiscale_dynamics.png")),
+        os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures", "fig1_multiscale_dynamics.svg")),
     ]
 
     for out_path in output_paths:

@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 import matplotlib.pyplot as plt
@@ -25,7 +26,7 @@ CONFIG = {
         "figsize": (7.6, 5.6),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": "d:/AGravity/Tide_Tutor/Figures/figure_2/panel_b_enthalpy_evolution.png",
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "panel_b_enthalpy_evolution.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)

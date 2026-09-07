@@ -1,3 +1,4 @@
+import sys
 """Generate and cache all evaluation datasets and metrics for Figure 4: Metric Decoupling.
 Saves data to data/generated/fig4_decoupling_data.npz.
 Guarantees 100% mathematical consistency across all panels and confusion matrix counts.
@@ -5,7 +6,7 @@ Guarantees 100% mathematical consistency across all panels and confusion matrix 
 import os
 import numpy as np
 
-output_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated")
+output_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data", "generated"))
 os.makedirs(output_dir, exist_ok=True)
 out_file = os.path.join(output_dir, "fig4_decoupling_data.npz")
 

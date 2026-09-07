@@ -1,3 +1,4 @@
+import sys
 """Panel (d): Static Ledinegg Instability & Dynamic Excursion Runaway Jump
 Modular, Fully-Configurable Python Script styled with modern Aptos typography.
 
@@ -40,7 +41,7 @@ CONFIG = {
         "figsize": (6.8, 5.6),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": "d:/AGravity/Tide_Tutor/Figures/figure_1/panel_d_ledinegg_excursion.png",
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "panel_d_ledinegg_excursion.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + stixsans)

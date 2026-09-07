@@ -1,3 +1,4 @@
+import sys
 """Panel (d): Machine-Precision Mesh Independence Across Node Counts
 Demonstrates relative error < 10^-15 across N1 = 2 to 16 against closed-form analytical Euler relation Eq. (1.4).
 """
@@ -28,7 +29,7 @@ CONFIG = {
         "figsize": (7.6, 5.6),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": "d:/AGravity/Tide_Tutor/Figures/figure_2/panel_d_mesh_independence.png",
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_2", "panel_d_mesh_independence.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)

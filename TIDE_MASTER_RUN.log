@@ -1,0 +1,356 @@
+[2026-09-07 10:16:46] [INFO] ================================================================================
+[2026-09-07 10:16:46] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 3, Cores: 4)
+[2026-09-07 10:16:46] [INFO] ================================================================================
+[2026-09-07 10:16:46] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:16:46] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:16:46] [INFO] ================================================================================
+[2026-09-07 10:16:46] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:16:46] [INFO] ================================================================================
+[2026-09-07 10:17:02] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:17:02] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:17:02] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:17:13] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:17:18] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:17:18] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 32.21s
+[2026-09-07 10:17:18] [INFO] ================================================================================
+[2026-09-07 10:17:18] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:17:18] [INFO] ================================================================================
+[2026-09-07 10:17:18] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:17:30] [INFO]   Saved: None
+[2026-09-07 10:17:30] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:17:30] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:17:30] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 11.85s
+[2026-09-07 10:17:30] [INFO] ================================================================================
+[2026-09-07 10:17:30] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (3 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:17:30] [INFO] ================================================================================
+[2026-09-07 10:17:30] [INFO] Launching 15 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:18:31] [INFO] ================================================================================
+[2026-09-07 10:18:31] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 3, Cores: 4)
+[2026-09-07 10:18:31] [INFO] ================================================================================
+[2026-09-07 10:18:31] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:18:31] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:18:31] [INFO] ================================================================================
+[2026-09-07 10:18:31] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:18:31] [INFO] ================================================================================
+[2026-09-07 10:18:33] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:18:33] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:18:33] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:18:34] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:18:35] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:18:35] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 4.48s
+[2026-09-07 10:18:35] [INFO] ================================================================================
+[2026-09-07 10:18:35] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:18:35] [INFO] ================================================================================
+[2026-09-07 10:18:35] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:18:44] [INFO]   Saved: None
+[2026-09-07 10:18:44] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:18:44] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:18:44] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 9.26s
+[2026-09-07 10:18:44] [INFO] ================================================================================
+[2026-09-07 10:18:44] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (3 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:18:44] [INFO] ================================================================================
+[2026-09-07 10:18:44] [INFO] Launching 15 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:19:27] [INFO] ================================================================================
+[2026-09-07 10:19:27] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 3, Cores: 4)
+[2026-09-07 10:19:27] [INFO] ================================================================================
+[2026-09-07 10:19:27] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:19:27] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:19:27] [INFO] ================================================================================
+[2026-09-07 10:19:27] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:19:27] [INFO] ================================================================================
+[2026-09-07 10:19:32] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:19:32] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:19:32] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:19:33] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:19:34] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:19:34] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 7.03s
+[2026-09-07 10:19:34] [INFO] ================================================================================
+[2026-09-07 10:19:34] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:19:34] [INFO] ================================================================================
+[2026-09-07 10:19:34] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:19:42] [INFO]   Saved: None
+[2026-09-07 10:19:42] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:19:43] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:19:43] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 8.95s
+[2026-09-07 10:19:43] [INFO] ================================================================================
+[2026-09-07 10:19:43] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (3 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:19:43] [INFO] ================================================================================
+[2026-09-07 10:19:43] [INFO] Launching 15 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:23:10] [INFO] ================================================================================
+[2026-09-07 10:23:10] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 3, Cores: 4)
+[2026-09-07 10:23:10] [INFO] ================================================================================
+[2026-09-07 10:23:10] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:23:10] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:23:10] [INFO] ================================================================================
+[2026-09-07 10:23:10] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:23:10] [INFO] ================================================================================
+[2026-09-07 10:23:13] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:23:13] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:23:13] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:23:14] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:23:15] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:23:15] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 4.32s
+[2026-09-07 10:23:15] [INFO] ================================================================================
+[2026-09-07 10:23:15] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:23:15] [INFO] ================================================================================
+[2026-09-07 10:23:15] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:23:24] [INFO]   Saved: None
+[2026-09-07 10:23:24] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:23:25] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:23:25] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 9.96s
+[2026-09-07 10:23:25] [INFO] ================================================================================
+[2026-09-07 10:23:25] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (3 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:23:25] [INFO] ================================================================================
+[2026-09-07 10:23:25] [INFO] Launching 15 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:26:17] [INFO]   Progress: [10/15] tasks finished (66.7%)
+[2026-09-07 10:26:56] [INFO]   Progress: [15/15] tasks finished (100.0%)
+[2026-09-07 10:26:57] [INFO]   Config 'baseline       ': Near RMSE = 0.02000 +/- 0.00000, Ratio = 0.14
+[2026-09-07 10:26:57] [INFO]   Config 'capacity_128x3 ': Near RMSE = 0.12485 +/- 0.03262, Ratio = 1.00
+[2026-09-07 10:26:57] [INFO]   Config 'capacity_256x3 ': Near RMSE = 0.24177 +/- 0.09987, Ratio = 1.90
+[2026-09-07 10:26:57] [INFO]   Config 'fourier_128x3  ': Near RMSE = 3.65988 +/- 1.05997, Ratio = 0.87
+[2026-09-07 10:26:57] [INFO]   Config 'combined_fix   ': Near RMSE = 0.10652 +/- 0.06258, Ratio = 0.68
+[2026-09-07 10:26:57] [INFO] [CHECKPOINT] Stage 3 Completed Successfully in 212.07s. Saved: D:\AGravity\Tide_Tutor\data\generated\fresh_phase4_results_20260907_102657.json
+[2026-09-07 10:26:57] [INFO] ================================================================================
+[2026-09-07 10:26:57] [INFO]   STAGE 4: Statistical Evaluation & Wilcoxon Hypothesis Testing
+[2026-09-07 10:26:57] [INFO] ================================================================================
+[2026-09-07 10:26:57] [INFO] Statistical Benchmark (N = 3 Seeds):
+[2026-09-07 10:26:57] [INFO]   Baseline Near RMSE:     0.02000
+[2026-09-07 10:26:57] [INFO]   Combined Fix Near RMSE: 0.10652
+[2026-09-07 10:26:57] [INFO]   Absolute Error Cut:     -432.62% reduction
+[2026-09-07 10:26:57] [INFO]   Positive Seeds:         0/3 positive
+[2026-09-07 10:26:57] [INFO]   Wilcoxon Test p-value:  1.0000e+00 (INCONCLUSIVE)
+[2026-09-07 10:26:57] [INFO] [CHECKPOINT] Stage 4 Completed Successfully in 0.08s
+[2026-09-07 10:26:57] [INFO] ================================================================================
+[2026-09-07 10:26:57] [INFO]   STAGE 5: High-Resolution Journal Figure Assembly (Figs 1-7 + Graphical Abstract)
+[2026-09-07 10:26:57] [INFO] ================================================================================
+[2026-09-07 10:26:57] [INFO] Rendering figure_1 (main_fig1_multiscale_dynamics.py)...
+[2026-09-07 10:26:57] [ERROR]   ERROR rendering figure_1:   File "D:\AGravity\Tide_Tutor\Figures\figure_1\main_fig1_multiscale_dynamics.py", line 2
+    \ufeffr"""Master Composite Figure 1: Multiscale Thermal-Hydraulic Dynamics of Two-Phase Flow Instabilities
+    ^
+SyntaxError: invalid non-printable character U+FEFF
+
+[2026-09-07 10:26:57] [INFO] Rendering figure_2 (main_fig2_ode_and_continuation.py)...
+[2026-09-07 10:27:28] [INFO]   Successfully compiled & synced figure_2
+[2026-09-07 10:27:28] [INFO] Rendering figure_3 (main_fig3_knife_edge_geometry.py)...
+[2026-09-07 10:27:30] [ERROR]   ERROR rendering figure_3: Traceback (most recent call last):
+  File "D:\AGravity\Tide_Tutor\Figures\figure_3\main_fig3_knife_edge_geometry.py", line 441, in <module>
+    generate_master_fig3()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\AGravity\Tide_Tutor\Figures\figure_3\main_fig3_knife_edge_geometry.py", line 383, in generate_master_fig3
+    data = load_ground_truth_data()
+  File "D:\AGravity\Tide_Tutor\Figures\figure_3\main_fig3_knife_edge_geometry.py", line 71, in load_ground_truth_data
+    cache_path = os.path.normpath(ros.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz")))
+                                  ^^^
+NameError: name 'ros' is not defined. Did you mean: 'os'?
+
+[2026-09-07 10:27:30] [INFO] Rendering figure_4 (main_fig4_metric_decoupling.py)...
+[2026-09-07 10:27:33] [ERROR]   ERROR rendering figure_4: Traceback (most recent call last):
+  File "D:\AGravity\Tide_Tutor\Figures\figure_4\main_fig4_metric_decoupling.py", line 141, in <module>
+    generate_master_fig4()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\AGravity\Tide_Tutor\Figures\figure_4\main_fig4_metric_decoupling.py", line 72, in generate_master_fig4
+    data = load_data()
+  File "D:\AGravity\Tide_Tutor\Figures\figure_4\main_fig4_metric_decoupling.py", line 61, in load_data
+    cache_path = os.path.normpath(ros.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig4_decoupling_data.npz")))
+                                  ^^^
+NameError: name 'ros' is not defined. Did you mean: 'os'?
+
+[2026-09-07 10:27:33] [INFO] Rendering figure_5 (main_fig5_spectral_bias.py)...
+[2026-09-07 10:27:37] [ERROR]   ERROR rendering figure_5: Traceback (most recent call last):
+  File "D:\AGravity\Tide_Tutor\Figures\figure_5\main_fig5_spectral_bias.py", line 118, in <module>
+    generate_master_fig5()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\AGravity\Tide_Tutor\Figures\figure_5\main_fig5_spectral_bias.py", line 79, in generate_master_fig5
+    ms_dir = os.path.normpath(ros.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures")))
+                              ^^^
+NameError: name 'ros' is not defined. Did you mean: 'os'?
+
+[2026-09-07 10:27:37] [INFO] Rendering figure_6 (main_fig6_remediation_taxonomy.py)...
+[2026-09-07 10:27:56] [INFO]   Successfully compiled & synced figure_6
+[2026-09-07 10:27:56] [INFO] Rendering figure_7 (main_fig7_multi_seed_benchmark.py)...
+[2026-09-07 10:28:16] [INFO]   Successfully compiled & synced figure_7
+[2026-09-07 10:28:16] [INFO] Rendering graphical_abstract (make_graphical_abstract.py)...
+[2026-09-07 10:28:28] [INFO]   Successfully compiled & synced graphical_abstract
+[2026-09-07 10:28:29] [INFO] [CHECKPOINT] Stage 5 Completed Successfully in 91.68s
+[2026-09-07 10:28:29] [INFO] ================================================================================
+[2026-09-07 10:28:29] [INFO]   STAGE 7: Comparative Data Diff & Checkpoint Report (New vs Old Reference)
+[2026-09-07 10:28:29] [INFO] ================================================================================
+[2026-09-07 10:28:29] [INFO] Saved Comparative Report: D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 10:28:29] [INFO] Saved JSON Summary:       D:\AGravity\Tide_Tutor\data\generated\new_vs_old_summary.json
+[2026-09-07 10:28:29] [INFO] [CHECKPOINT] Stage 7 Completed Successfully in 0.06s
+[2026-09-07 10:28:29] [INFO] ================================================================================
+[2026-09-07 10:28:29] [INFO]   ALL 7 STAGES COMPLETED SUCCESSFULLY IN 5.31 MINUTES
+[2026-09-07 10:28:29] [INFO] ================================================================================
+[2026-09-07 10:28:29] [INFO] Execution Log:          D:\AGravity\Tide_Tutor\TIDE_MASTER_RUN.log
+[2026-09-07 10:28:29] [INFO] Comparative Report:     D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 10:28:29] [INFO] Synced Figures:         D:\AGravity\Tide_Tutor\manuscript\figures
+[2026-09-07 10:36:55] [INFO] ================================================================================
+[2026-09-07 10:36:55] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 3, Cores: 4)
+[2026-09-07 10:36:55] [INFO] ================================================================================
+[2026-09-07 10:36:55] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:36:55] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:36:55] [INFO] ================================================================================
+[2026-09-07 10:36:55] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:36:55] [INFO] ================================================================================
+[2026-09-07 10:37:02] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:37:02] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:37:02] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:37:03] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:37:04] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:37:04] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 8.42s
+[2026-09-07 10:37:04] [INFO] ================================================================================
+[2026-09-07 10:37:04] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:37:04] [INFO] ================================================================================
+[2026-09-07 10:37:04] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:37:14] [INFO]   Saved: None
+[2026-09-07 10:37:14] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:37:15] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:37:15] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 11.44s
+[2026-09-07 10:37:15] [INFO] ================================================================================
+[2026-09-07 10:37:15] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (3 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:37:16] [INFO] ================================================================================
+[2026-09-07 10:37:16] [INFO] Launching 15 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:40:18] [INFO]   Progress: [10/15] tasks finished (66.7%)
+[2026-09-07 10:40:57] [INFO]   Progress: [15/15] tasks finished (100.0%)
+[2026-09-07 10:40:58] [INFO]   Config 'baseline       ': Near RMSE = 0.02000 +/- 0.00000, Ratio = 0.14
+[2026-09-07 10:40:58] [INFO]   Config 'capacity_128x3 ': Near RMSE = 0.12485 +/- 0.03262, Ratio = 1.00
+[2026-09-07 10:40:58] [INFO]   Config 'capacity_256x3 ': Near RMSE = 0.24177 +/- 0.09987, Ratio = 1.90
+[2026-09-07 10:40:58] [INFO]   Config 'fourier_128x3  ': Near RMSE = 3.65988 +/- 1.05997, Ratio = 0.87
+[2026-09-07 10:40:58] [INFO]   Config 'combined_fix   ': Near RMSE = 0.10652 +/- 0.06258, Ratio = 0.68
+[2026-09-07 10:40:58] [INFO] [CHECKPOINT] Stage 3 Completed Successfully in 222.76s. Saved: D:\AGravity\Tide_Tutor\data\generated\fresh_phase4_results_20260907_104058.json
+[2026-09-07 10:40:58] [INFO] ================================================================================
+[2026-09-07 10:40:58] [INFO]   STAGE 4: Statistical Evaluation & Wilcoxon Hypothesis Testing
+[2026-09-07 10:40:58] [INFO] ================================================================================
+[2026-09-07 10:40:58] [INFO] Statistical Benchmark (N = 3 Seeds):
+[2026-09-07 10:40:58] [INFO]   Baseline Near RMSE:     0.02000
+[2026-09-07 10:40:59] [INFO]   Combined Fix Near RMSE: 0.10652
+[2026-09-07 10:40:59] [INFO]   Absolute Error Cut:     -432.62% reduction
+[2026-09-07 10:40:59] [INFO]   Positive Seeds:         0/3 positive
+[2026-09-07 10:40:59] [INFO]   Wilcoxon Test p-value:  1.0000e+00 (INCONCLUSIVE)
+[2026-09-07 10:40:59] [INFO] [CHECKPOINT] Stage 4 Completed Successfully in 0.09s
+[2026-09-07 10:40:59] [INFO] ================================================================================
+[2026-09-07 10:40:59] [INFO]   STAGE 5: High-Resolution Journal Figure Assembly (Figs 1-7 + Graphical Abstract)
+[2026-09-07 10:40:59] [INFO] ================================================================================
+[2026-09-07 10:40:59] [INFO] Rendering figure_1 (main_fig1_multiscale_dynamics.py)...
+[2026-09-07 10:41:45] [INFO]   Successfully compiled & synced figure_1
+[2026-09-07 10:41:45] [INFO] Rendering figure_2 (main_fig2_ode_and_continuation.py)...
+[2026-09-07 10:42:05] [INFO]   Successfully compiled & synced figure_2
+[2026-09-07 10:42:05] [INFO] Rendering figure_3 (main_fig3_knife_edge_geometry.py)...
+[2026-09-07 10:42:06] [ERROR]   ERROR rendering figure_3:   File "D:\AGravity\Tide_Tutor\Figures\figure_3\main_fig3_knife_edge_geometry.py", line 71
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz")))
+                                                                                                                                      ^
+SyntaxError: unmatched ')'
+
+[2026-09-07 10:42:06] [INFO] Rendering figure_4 (main_fig4_metric_decoupling.py)...
+[2026-09-07 10:42:06] [ERROR]   ERROR rendering figure_4:   File "D:\AGravity\Tide_Tutor\Figures\figure_4\main_fig4_metric_decoupling.py", line 61
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig4_decoupling_data.npz")))
+                                                                                                                                    ^
+SyntaxError: unmatched ')'
+
+[2026-09-07 10:42:06] [INFO] Rendering figure_5 (main_fig5_spectral_bias.py)...
+[2026-09-07 10:42:06] [ERROR]   ERROR rendering figure_5:   File "D:\AGravity\Tide_Tutor\Figures\figure_5\main_fig5_spectral_bias.py", line 79
+    ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures")))
+                                                                                                        ^
+SyntaxError: unmatched ')'
+
+[2026-09-07 10:42:06] [INFO] Rendering figure_6 (main_fig6_remediation_taxonomy.py)...
+[2026-09-07 10:42:19] [INFO]   Successfully compiled & synced figure_6
+[2026-09-07 10:42:19] [INFO] Rendering figure_7 (main_fig7_multi_seed_benchmark.py)...
+[2026-09-07 10:42:32] [INFO]   Successfully compiled & synced figure_7
+[2026-09-07 10:42:32] [INFO] Rendering graphical_abstract (make_graphical_abstract.py)...
+[2026-09-07 10:42:40] [INFO]   Successfully compiled & synced graphical_abstract
+[2026-09-07 10:42:40] [INFO] [CHECKPOINT] Stage 5 Completed Successfully in 101.61s
+[2026-09-07 10:42:40] [INFO] ================================================================================
+[2026-09-07 10:42:40] [INFO]   STAGE 7: Comparative Data Diff & Checkpoint Report (New vs Old Reference)
+[2026-09-07 10:42:40] [INFO] ================================================================================
+[2026-09-07 10:42:40] [INFO] Saved Comparative Report: D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 10:42:40] [INFO] Saved JSON Summary:       D:\AGravity\Tide_Tutor\data\generated\new_vs_old_summary.json
+[2026-09-07 10:42:40] [INFO] [CHECKPOINT] Stage 7 Completed Successfully in 0.06s
+[2026-09-07 10:42:40] [INFO] ================================================================================
+[2026-09-07 10:42:40] [INFO]   ALL 7 STAGES COMPLETED SUCCESSFULLY IN 5.75 MINUTES
+[2026-09-07 10:42:40] [INFO] ================================================================================
+[2026-09-07 10:42:40] [INFO] Execution Log:          D:\AGravity\Tide_Tutor\TIDE_MASTER_RUN.log
+[2026-09-07 10:42:40] [INFO] Comparative Report:     D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 10:42:40] [INFO] Synced Figures:         D:\AGravity\Tide_Tutor\manuscript\figures
+[2026-09-07 10:48:37] [INFO] ================================================================================
+[2026-09-07 10:48:37] [INFO]   STARTING TIDE MASTER PIPELINE RUN (Mode: quick, Seeds: 2, Cores: 4)
+[2026-09-07 10:48:37] [INFO] ================================================================================
+[2026-09-07 10:48:37] [INFO] Environment: Python 3.13.13 on win32
+[2026-09-07 10:48:37] [INFO] Root Directory: D:\AGravity\Tide_Tutor
+[2026-09-07 10:48:37] [INFO] ================================================================================
+[2026-09-07 10:48:37] [INFO]   STAGE 1: Physics Model & Codimension-2 Continuation Verification
+[2026-09-07 10:48:37] [INFO] ================================================================================
+[2026-09-07 10:48:47] [INFO] Verifying Bogdanov-Takens singularity coordinates at Point B...
+[2026-09-07 10:48:47] [INFO]   Parameters: Fr=0.5, Lambda=0.001, ki=11.0, ke=3.0
+[2026-09-07 10:48:47] [INFO]   Singularity: Nsub_BT = 14.142795, Npch_BT = 20.597778
+[2026-09-07 10:48:47] [INFO]   Steady state (lambda0, m0, ui0) = [0.0429, 0.0858, 0.1287]
+[2026-09-07 10:48:48] [INFO]   Near-vertex slice (delta=0.1): lower_fold = 20.4005, upper_hopf = 20.4968, width = 0.0963
+[2026-09-07 10:48:48] [INFO] [CHECKPOINT] Stage 1 Completed Successfully in 10.98s
+[2026-09-07 10:48:48] [INFO] ================================================================================
+[2026-09-07 10:48:48] [INFO]   STAGE 2: Ground-Truth Dataset Generation
+[2026-09-07 10:48:48] [INFO] ================================================================================
+[2026-09-07 10:48:48] [INFO] Generating Figure 3 continuation dataset (fig3_continuation_data.npz)...
+[2026-09-07 10:48:56] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig3_continuation_data.npz
+[2026-09-07 10:48:56] [INFO] Generating Figure 4 decoupling dataset (fig4_decoupling_data.npz)...
+[2026-09-07 10:48:57] [INFO]   Saved: D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz
+[2026-09-07 10:48:57] [INFO] [CHECKPOINT] Stage 2 Completed Successfully in 8.64s
+[2026-09-07 10:48:57] [INFO] ================================================================================
+[2026-09-07 10:48:57] [INFO]   STAGE 3: Parallelized Multi-Seed Surrogate Training (2 Seeds x 5 Architectures on 4 Workers)
+[2026-09-07 10:48:57] [INFO] ================================================================================
+[2026-09-07 10:48:57] [INFO] Launching 10 independent training jobs across 4 parallel CPU processes...
+[2026-09-07 10:50:42] [INFO]   Progress: [5/10] surrogate models trained (50.0%)
+[2026-09-07 10:51:07] [INFO]   Progress: [10/10] surrogate models trained (100.0%)
+[2026-09-07 10:51:08] [INFO]   Config 'baseline       ': Near RMSE = 0.02000 +/- 0.00000, Ratio = 0.16
+[2026-09-07 10:51:08] [INFO]   Config 'capacity_128x3 ': Near RMSE = 0.11294 +/- 0.03422, Ratio = 1.52
+[2026-09-07 10:51:08] [INFO]   Config 'capacity_256x3 ': Near RMSE = 0.26698 +/- 0.11426, Ratio = 1.70
+[2026-09-07 10:51:08] [INFO]   Config 'fourier_128x3  ': Near RMSE = 4.30692 +/- 0.65522, Ratio = 0.85
+[2026-09-07 10:51:08] [INFO]   Config 'combined_fix   ': Near RMSE = 0.13600 +/- 0.05716, Ratio = 1.00
+[2026-09-07 10:51:08] [INFO] [CHECKPOINT] Stage 3 Completed Successfully in 130.91s. Saved: D:\AGravity\Tide_Tutor\data\generated\fresh_phase4_results_20260907_105108.json
+[2026-09-07 10:51:08] [INFO] ================================================================================
+[2026-09-07 10:51:08] [INFO]   STAGE 4: Statistical Evaluation & Wilcoxon Hypothesis Testing
+[2026-09-07 10:51:08] [INFO] ================================================================================
+[2026-09-07 10:51:08] [INFO] Statistical Benchmark (N = 2 Seeds):
+[2026-09-07 10:51:08] [INFO]   Baseline Near RMSE:     0.02000
+[2026-09-07 10:51:08] [INFO]   Combined Fix Near RMSE: 0.13600
+[2026-09-07 10:51:08] [INFO]   Absolute Error Cut:     -580.02% reduction
+[2026-09-07 10:51:08] [INFO]   Positive Seeds:         0/2 positive
+[2026-09-07 10:51:08] [INFO]   Wilcoxon Test p-value:  1.0000e+00 (INCONCLUSIVE)
+[2026-09-07 10:51:08] [INFO] [CHECKPOINT] Stage 4 Completed Successfully in 0.04s
+[2026-09-07 10:51:08] [INFO] ================================================================================
+[2026-09-07 10:51:08] [INFO]   STAGE 5: High-Resolution Journal Figure Assembly (Figs 1-7 + Graphical Abstract)
+[2026-09-07 10:51:08] [INFO] ================================================================================
+[2026-09-07 10:51:08] [INFO] Rendering figure_1 (main_fig1_multiscale_dynamics.py)...
+[2026-09-07 10:52:01] [INFO]   Successfully compiled & synced figure_1
+[2026-09-07 10:52:01] [INFO] Rendering figure_2 (main_fig2_ode_and_continuation.py)...
+[2026-09-07 10:52:30] [INFO]   Successfully compiled & synced figure_2
+[2026-09-07 10:52:30] [INFO] Rendering figure_3 (main_fig3_knife_edge_geometry.py)...
+[2026-09-07 10:53:00] [INFO]   Successfully compiled & synced figure_3
+[2026-09-07 10:53:00] [INFO] Rendering figure_4 (main_fig4_metric_decoupling.py)...
+[2026-09-07 10:53:18] [INFO]   Successfully compiled & synced figure_4
+[2026-09-07 10:53:18] [INFO] Rendering figure_5 (main_fig5_spectral_bias.py)...
+[2026-09-07 10:53:37] [INFO]   Successfully compiled & synced figure_5
+[2026-09-07 10:53:37] [INFO] Rendering figure_6 (main_fig6_remediation_taxonomy.py)...
+[2026-09-07 10:53:54] [INFO]   Successfully compiled & synced figure_6
+[2026-09-07 10:53:54] [INFO] Rendering figure_7 (main_fig7_multi_seed_benchmark.py)...
+[2026-09-07 10:54:09] [INFO]   Successfully compiled & synced figure_7
+[2026-09-07 10:54:09] [INFO] Rendering graphical_abstract (make_graphical_abstract.py)...
+[2026-09-07 10:54:21] [INFO]   Successfully compiled & synced graphical_abstract
+[2026-09-07 10:54:21] [INFO] [CHECKPOINT] Stage 5 Completed Successfully in 192.85s
+[2026-09-07 10:54:21] [INFO] ================================================================================
+[2026-09-07 10:54:21] [INFO]   STAGE 6: Complete 97-Test Pytest Suite Execution
+[2026-09-07 10:54:21] [INFO] ================================================================================
+[2026-09-07 10:54:21] [INFO] Executing: D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe -m pytest tests/ -v
+[2026-09-07 11:06:09] [INFO]   Pytest Result: ======================= 97 passed in 698.22s (0:11:38) ========================
+[2026-09-07 11:06:09] [INFO] [CHECKPOINT] Stage 6 Completed in 708.52s
+[2026-09-07 11:06:09] [INFO] ================================================================================
+[2026-09-07 11:06:09] [INFO]   STAGE 7: Comparative Data Diff & Checkpoint Report (New vs Old Reference)
+[2026-09-07 11:06:09] [INFO] ================================================================================
+[2026-09-07 11:06:09] [INFO] Saved Comparative Report: D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 11:06:09] [INFO] Saved JSON Summary:       D:\AGravity\Tide_Tutor\data\generated\new_vs_old_summary.json
+[2026-09-07 11:06:09] [INFO] [CHECKPOINT] Stage 7 Completed Successfully in 0.04s
+[2026-09-07 11:06:09] [INFO] ================================================================================
+[2026-09-07 11:06:09] [INFO]   ALL 7 STAGES COMPLETED SUCCESSFULLY IN 17.54 MINUTES
+[2026-09-07 11:06:09] [INFO] ================================================================================
+[2026-09-07 11:06:09] [INFO] Execution Log:          D:\AGravity\Tide_Tutor\TIDE_MASTER_RUN.log
+[2026-09-07 11:06:09] [INFO] Comparative Report:     D:\AGravity\Tide_Tutor\DATA_DIFF_REPORT.md
+[2026-09-07 11:06:09] [INFO] Synced Figures:         D:\AGravity\Tide_Tutor\manuscript\figures

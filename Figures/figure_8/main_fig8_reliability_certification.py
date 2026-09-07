@@ -1,3 +1,4 @@
+import sys
 """Master Figure 8: Reliability Certification Framework, Industrial Licensing, and Multi-Physics Universality
 Assembles all 4 panels in a 2-column by 2-row publication-grade layout (300 DPI).
 """
@@ -9,7 +10,7 @@ import matplotlib.patches as patches
 
 output_dir = os.path.dirname(os.path.abspath(__file__))
 os.makedirs(output_dir, exist_ok=True)
-os.makedirs("d:/AGravity/Tide_Tutor/manuscript/figures", exist_ok=True)
+os.makedirs(os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures")), exist_ok=True)
 
 # Publication Typography
 plt.rcParams.update({
@@ -254,7 +255,7 @@ draw_panel_d(fig.add_subplot(gs[1, 1]))
 
 out_png_local = os.path.join(output_dir, "fig8_reliability_certification_master.png")
 out_pdf_local = os.path.join(output_dir, "fig8_reliability_certification_master.pdf")
-out_png_ms = "d:/AGravity/Tide_Tutor/manuscript/figures/fig8_reliability_certification.png"
+out_png_ms = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures", "fig8_reliability_certification.png"))
 
 fig.savefig(out_png_local, dpi=300, bbox_inches="tight")
 fig.savefig(out_pdf_local, bbox_inches="tight")

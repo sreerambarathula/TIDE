@@ -1,3 +1,4 @@
+import sys
 """Compute and cache machine-precision ground-truth continuation datasets for Figure 3.
 Reads directly from src/tide/ physics and continuation solvers.
 """
@@ -134,7 +135,7 @@ def compute_all_fig3_data():
     # --------------------------------------------------------------------------
     # Save to Cache NPZ
     # --------------------------------------------------------------------------
-    out_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated")
+    out_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data", "generated"))
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "fig3_continuation_data.npz")
     
@@ -162,6 +163,7 @@ def compute_all_fig3_data():
         
     np.savez_compressed(out_path, **save_dict)
     print(f"\n[SUCCESS] Exact ground-truth saved in {time.time()-t0:.2f}s to:\n  {out_path}")
+    return out_path
 
 if __name__ == "__main__":
     compute_all_fig3_data()

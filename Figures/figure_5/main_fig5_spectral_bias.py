@@ -1,3 +1,4 @@
+import sys
 """Master Figure 5: Spectral Bias and High-Frequency Boundary Attenuation
 Publication-Grade 6-Panel Layout (2 Columns x 3 Rows) at 300 DPI for Elsevier RE&SS.
 
@@ -75,7 +76,7 @@ def generate_master_fig5():
     draw_panel_f_on_ax(ax_f, config=CONFIG_F)
 
     output_dir = os.path.dirname(os.path.abspath(__file__))
-    ms_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\manuscript\figures")
+    ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures"))
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(ms_dir, exist_ok=True)
 

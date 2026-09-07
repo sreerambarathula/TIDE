@@ -1,10 +1,11 @@
+import sys
 """Rebuilds equations_and_nomenclature_directory.html with 100% comprehensive multi-citations.
 Ensures EVERY cited paper in EVERY equation has its full bibliographic record and clickable DOI badge.
 """
 import os
 import re
 
-html_path = "d:/AGravity/Tide_Tutor/docs/equations_and_nomenclature_directory.html"
+html_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "docs", "equations_and_nomenclature_directory.html"))
 with open(html_path, "r", encoding="utf-8") as f:
     content = f.read()
 
@@ -176,7 +177,7 @@ content = content.replace(old_cb5, new_cb5)
 with open(html_path, "w", encoding="utf-8") as f:
     f.write(content)
 
-ms_path = "d:/AGravity/Tide_Tutor/manuscript/equations_and_nomenclature_directory.html"
+ms_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "manuscript", "equations_and_nomenclature_directory.html"))
 with open(ms_path, "w", encoding="utf-8") as f:
     f.write(content)
 

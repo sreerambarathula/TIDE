@@ -1,3 +1,4 @@
+import sys
 """Panel (b): Topological Contrast: Transversal Crossing (Point A) vs. Tangential Cusp (Point B)
 Full, un-truncated physical continuation across the complete operating domains:
   - Left: Non-degenerate transversal X-crossing at Point A (Lambda = 5.90, kin = 6.55, kex = 2.03, Fr = 0.035)
@@ -38,7 +39,7 @@ CONFIG = {
     "figure": {
         "figsize": (8.2, 6.2),
         "dpi": 300,
-        "output_path": os.path.normpath(r"D:\AGravity\Tide_Tutor\Figures\figure_3\panel_b_transversal_vs_tangent_cusp.png"),
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_3", "panel_b_transversal_vs_tangent_cusp.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)
@@ -136,7 +137,7 @@ CONFIG = {
 
 def load_data():
     """Load continuation data from precomputed npz cache for instantaneous generation."""
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig3_continuation_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz"))
     if os.path.exists(cache_path):
         return np.load(cache_path)
     # Fallback to direct computation if needed

@@ -7,8 +7,9 @@ Guarantees:
 """
 import os
 
-docs_dir = "d:/AGravity/Tide_Tutor/docs"
-manuscript_dir = "d:/AGravity/Tide_Tutor/manuscript"
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+docs_dir = os.path.join(REPO_ROOT, "docs")
+manuscript_dir = os.path.join(REPO_ROOT, "manuscript")
 os.makedirs(docs_dir, exist_ok=True)
 os.makedirs(manuscript_dir, exist_ok=True)
 

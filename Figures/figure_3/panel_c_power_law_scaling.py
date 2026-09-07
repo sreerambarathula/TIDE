@@ -1,3 +1,4 @@
+import sys
 """Panel (c): Multi-Decade Empirical Power-Law Scaling (Width propto delta^1.00)
 4-decade log-log continuation data proving exact linear scaling R^2 = 1.000000 and refuting quadratic tangency.
 Evaluated directly from machine-precision continuation solutions.
@@ -29,7 +30,7 @@ CONFIG = {
         "figsize": (8.2, 6.2),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": os.path.normpath(r"D:\AGravity\Tide_Tutor\Figures\figure_3\panel_c_power_law_scaling.png"),
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_3", "panel_c_power_law_scaling.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)
@@ -99,10 +100,10 @@ CONFIG = {
 }
 
 def load_ground_truth_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig3_continuation_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"d:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", os.path.normpath(r"D:\AGravity\Tide_Tutor\scripts\generate_fig3_ground_truth_data.py")], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig3_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 def generate_panel_c(config=CONFIG):

@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 import matplotlib.pyplot as plt
@@ -25,7 +26,7 @@ CONFIG = {
         "figsize": (6.8, 5.6),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": "d:/AGravity/Tide_Tutor/Figures/figure_1/panel_b_void_paradox.png",
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_1", "panel_b_void_paradox.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + stixsans)

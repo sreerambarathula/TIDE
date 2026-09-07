@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 import matplotlib.pyplot as plt
@@ -41,7 +42,7 @@ PALETTE = {
     "card_bg": "#f8fafc",
 }
 
-data = np.load(r"d:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz")
+data = np.load(os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data", "generated", "fig4_decoupling_data.npz")))
 g_true = data["g_true_global"]
 g_pred = data["g_pred_global"]
 r2_global = float(data["r2_global"])
@@ -111,7 +112,7 @@ leg = ax1.legend(loc="lower right", frameon=True, framealpha=1.0, facecolor="whi
                  edgecolor=PALETTE["border_gray"], fontsize=11.0, borderpad=0.45)
 leg.set_zorder(10)
 
-out1 = r"d:\AGravity\Tide_Tutor\Figures\figure_4\panel_a_inset_zoom.png"
+out1 = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "Figures", "figure_4", "panel_a_inset_zoom.png"))
 fig1.savefig(out1, dpi=300, bbox_inches="tight")
 plt.close(fig1)
 
@@ -186,7 +187,7 @@ ax2b.grid(True, alpha=0.28)
 ax2b.legend(loc="lower right", frameon=True, framealpha=1.0, facecolor="white",
             edgecolor=PALETTE["border_gray"], fontsize=11.0, borderpad=0.45)
 
-out2 = r"d:\AGravity\Tide_Tutor\Figures\figure_4\panel_a_linked_side_by_side.png"
+out2 = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "Figures", "figure_4", "panel_a_linked_side_by_side.png"))
 fig2.savefig(out2, dpi=300, bbox_inches="tight")
 plt.close(fig2)
 

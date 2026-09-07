@@ -1,3 +1,4 @@
+import sys
 """Panel (b): Near-Boundary Parity Breakdown (|g| <= 0.10)
 Part of Master Figure 4 for Elsevier RE&SS.
 Exposes the severe degradation of predictions near the stability frontier where sign disagreement reaches 38%.
@@ -55,10 +56,10 @@ CONFIG = {
 }
 
 def load_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig4_decoupling_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", r"D:\AGravity\Tide_Tutor\scripts\generate_fig4_ground_truth_data.py"], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig4_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 def draw_panel_b_on_ax(ax, data, config=CONFIG):

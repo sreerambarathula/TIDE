@@ -1,3 +1,4 @@
+import sys
 """Master Figure 6: Remediation Frameworks & Architectural Mechanisms
 Elsevier Reliability Engineering & System Safety (RE&SS)
 Standardized 5-Panel Architecture (Panels a–e):
@@ -444,7 +445,7 @@ def assemble_master_figure_6():
     out_png_local = os.path.join(output_dir, "fig6_remediation_taxonomy_master.png")
     out_pdf_local = os.path.join(output_dir, "fig6_remediation_taxonomy_master.pdf")
     
-    ms_dir = "d:/AGravity/Tide_Tutor/manuscript/figures"
+    ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures"))
     os.makedirs(ms_dir, exist_ok=True)
     out_png_ms = os.path.join(ms_dir, "fig6_remediation_taxonomy.png")
     out_pdf_ms = os.path.join(ms_dir, "fig6_remediation_taxonomy.pdf")

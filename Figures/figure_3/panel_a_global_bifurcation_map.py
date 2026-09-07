@@ -1,3 +1,4 @@
+import sys
 """Panel (a): Geometry of the Knife-Edge Stability Wedge
 Plotting exact ground-truth Fold and Hopf bifurcation manifolds meeting tangentially at the 
 Bogdanov-Takens singularity, with rich visible regime fills, concise callouts, zero collisions,
@@ -31,7 +32,7 @@ CONFIG = {
         "figsize": (8.2, 6.2),
         "dpi": 300,
         "tight_layout": True,
-        "output_path": os.path.normpath(r"D:\AGravity\Tide_Tutor\Figures\figure_3\panel_a_global_bifurcation_map.png"),
+        "output_path": os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "Figures", "figure_3", "panel_a_global_bifurcation_map.png")),
     },
 
     # 2. Typography & Matplotlib RC Params (Aptos + STIX-Sans)
@@ -150,10 +151,10 @@ CONFIG = {
 }
 
 def load_ground_truth_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig3_continuation_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig3_continuation_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", r"D:\AGravity\Tide_Tutor\scripts\generate_fig3_ground_truth_data.py"], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig3_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 def generate_panel_a(config=CONFIG):

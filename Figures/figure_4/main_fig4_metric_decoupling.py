@@ -1,3 +1,4 @@
+import sys
 """Master Figure 4: The Metric Decoupling Phenomenon: Global Success Masks Local Near-Boundary Failure
 Publication-Grade 6-Panel Layout (2 Columns x 3 Rows) at 300 DPI for Elsevier RE&SS.
 Evaluates directly from cached evaluation metrics, parity datasets, and 2D spatial error fields.
@@ -57,10 +58,10 @@ MASTER_TYPOGRAPHY = {
 }
 
 def load_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "data", "generated", "fig4_decoupling_data.npz"))
     if not os.path.exists(cache_path):
         import subprocess
-        subprocess.run([r"D:\AGravity\Tide_Tutor\.venv\Scripts\python.exe", r"D:\AGravity\Tide_Tutor\scripts\generate_fig4_ground_truth_data.py"], check=True)
+        subprocess.run([sys.executable, os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "scripts", "generate_fig4_ground_truth_data.py"))], check=True)
     return np.load(cache_path)
 
 def generate_master_fig4():
@@ -106,7 +107,7 @@ def generate_master_fig4():
     fig.add_artist(con_bot)
 
     output_dir = os.path.dirname(os.path.abspath(__file__))
-    ms_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\manuscript\figures")
+    ms_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "../..", "manuscript", "figures"))
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(ms_dir, exist_ok=True)
 

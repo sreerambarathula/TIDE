@@ -1,0 +1,66 @@
+{
+  "diff_table": [
+    {
+      "config": "baseline",
+      "metric": "Baseline Near RMSE",
+      "old": 0.02316,
+      "new": 0.02,
+      "abs_diff": -0.0031599999999999996,
+      "rel_diff_pct": -13.644214162348876,
+      "status": "VERIFIED (Within Seed Margin)"
+    },
+    {
+      "config": "baseline",
+      "metric": "Baseline Far RMSE",
+      "old": 0.00766,
+      "new": 0.12297287554854763,
+      "abs_diff": 0.11531287554854763,
+      "rel_diff_pct": 1505.3900202160266,
+      "status": "DRIFT / REVIEW"
+    },
+    {
+      "config": "capacity_128x3",
+      "metric": "Capacity 3x128 Near RMSE",
+      "old": 0.01501,
+      "new": 0.1129433600105223,
+      "abs_diff": 0.0979333600105223,
+      "rel_diff_pct": 652.4540973385896,
+      "status": "DRIFT / REVIEW"
+    },
+    {
+      "config": "capacity_256x3",
+      "metric": "Capacity 3x256 Near RMSE",
+      "old": 0.02115040392631184,
+      "new": 0.26698347089935837,
+      "abs_diff": 0.24583306697304652,
+      "rel_diff_pct": 1162.3090879471176,
+      "status": "DRIFT / REVIEW"
+    },
+    {
+      "config": "combined_fix",
+      "metric": "Combined Fix Near RMSE",
+      "old": 0.011997581937262396,
+      "new": 0.13600351685796808,
+      "abs_diff": 0.12400593492070568,
+      "rel_diff_pct": 1033.5910650092321,
+      "status": "DRIFT / REVIEW"
+    },
+    {
+      "config": "combined_fix",
+      "metric": "Combined Fix Far RMSE",
+      "old": 0.005344767113002586,
+      "new": 0.13664469270773294,
+      "abs_diff": 0.13129992559473036,
+      "rel_diff_pct": 2456.60704795365,
+      "status": "DRIFT / REVIEW"
+    }
+  ],
+  "stats": {
+    "status": "SUCCESS",
+    "elapsed_s": 0.042264461517333984,
+    "reduction_pct": -580.0175842898403,
+    "p_val": 1.0,
+    "positive_count": 0,
+    "n_seeds": 2
+  }
+}

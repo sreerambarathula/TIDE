@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 import matplotlib.pyplot as plt
@@ -47,7 +48,7 @@ CONFIG = {
 }
 
 def load_data():
-    cache_path = os.path.normpath(r"D:\AGravity\Tide_Tutor\data\generated\fig4_decoupling_data.npz")
+    cache_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data", "generated", "fig4_decoupling_data.npz"))
     return np.load(cache_path)
 
 def generate_attached_parity():
@@ -156,7 +157,7 @@ def generate_attached_parity():
     leg2.set_zorder(10)
 
     # Save outputs
-    out_dir = os.path.normpath(r"D:\AGravity\Tide_Tutor\Figures\figure_4")
+    out_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "Figures", "figure_4"))
     out_png = os.path.join(out_dir, "panel_a_attached_parity.png")
     fig.savefig(out_png, dpi=300, bbox_inches="tight")
     plt.close(fig)
