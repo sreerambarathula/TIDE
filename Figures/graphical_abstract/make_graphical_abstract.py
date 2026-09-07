@@ -258,6 +258,9 @@ print("  -> Manuscript PNG:", out_png_ms)
 print("  -> Manuscript PDF:", out_pdf_ms)
 
 brain_dir = "C:/Users/User/.gemini/antigravity/brain/9d59c56d-97c0-4103-bb80-3739087d8e26"
-brain_file = os.path.join(brain_dir, "graphical_abstract.png")
-shutil.copyfile(out_png_local, brain_file)
-print("  -> Brain Artifact PNG:", brain_file)
+if os.path.isdir(brain_dir):
+    brain_file = os.path.join(brain_dir, "graphical_abstract.png")
+    shutil.copyfile(out_png_local, brain_file)
+    print("  -> Brain Artifact PNG:", brain_file)
+
+
