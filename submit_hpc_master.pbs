@@ -5,7 +5,7 @@
 #PBS -M barathula.sreeram@ntu.edu.sg
 #PBS -m ae
 #PBS -l walltime=02:00:00
-#PBS -l select=1:ncpus=24:mpiprocs=24:mem=48gb
+#PBS -l select=1:ncpus=32:mpiprocs=32:mem=64gb
 #PBS -o TIDE_MASTER_RUN.log
 
 set -Eeuo pipefail
@@ -16,8 +16,9 @@ echo " TIDE ALL-IN-ONE MASTER HPC EXECUTION"
 echo " Start Time: $(date)"
 echo " Host: $(hostname)"
 echo " Workdir: $PBS_O_WORKDIR"
-echo " Cores Allocated: 24"
+echo " Cores Allocated: 32"
 echo "================================================================================"
+
 
 
 # 1. Environment Bootstrap
@@ -43,12 +44,12 @@ fi
 python3 -m pip install -e . --no-deps --quiet 2>/dev/null || true
 
 # 2. Execute Master Pipeline
-echo "[STEP 2/3] Launching End-to-End Master Pipeline (All 7 Stages across 24 Cores)..."
+echo "[STEP 2/3] Launching End-to-End Master Pipeline (All 7 Stages across 32 Cores)..."
 export OMP_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 
-python3 -u run_master_pipeline.py --mode full --cores 24 2>&1 | tee -a TIDE_MASTER_RUN.log
+python3 -u run_master_pipeline.py --mode full --cores 32 2>&1 | tee -a TIDE_MASTER_RUN.log
 
 # 3. Final Summary & Completion Checkpoint
 echo "================================================================================"
